@@ -1,11 +1,10 @@
-package com.oms.saas.platform_management.service.Impl;
+package com.oms.saas.platform_management.Service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.oms.saas.platform_management.Entity.JdpTbTrade;
 import com.oms.saas.platform_management.Mapper.Jdp.JdpTbTradeMapper;
-import com.oms.saas.platform_management.api.Result;
-import com.oms.saas.platform_management.service.PullOrderService;
+import com.oms.saas.platform_management.Service.PullOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

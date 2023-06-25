@@ -1,6 +1,8 @@
 package com.oms.saas.commodity.api;
 
 
+import lombok.Data;
+
 /**
  * APi返回的状态码表
  * @author cc
@@ -16,7 +18,7 @@ public enum ResultCode {
     SUCCESS(10000, "请求成功"),
     FAILED(10001, "操作失败"),
     TOKEN_FAILED(10002, "token失效"),
-
+    PARAM_ERROR(10003,"参数错误"),
     NONE(99999, "无");
 
     private int code;

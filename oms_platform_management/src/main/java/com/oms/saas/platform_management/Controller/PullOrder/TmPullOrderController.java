@@ -3,7 +3,7 @@ package com.oms.saas.platform_management.Controller.PullOrder;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.oms.saas.platform_management.Entity.JdpTbTrade;
 import com.oms.saas.platform_management.api.Result;
-import com.oms.saas.platform_management.service.Impl.TmPullOrderServiceImpl;
+import com.oms.saas.platform_management.Service.Impl.TmPullOrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 

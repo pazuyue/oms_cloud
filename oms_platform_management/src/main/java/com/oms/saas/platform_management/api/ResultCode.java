@@ -15,6 +15,7 @@ public enum ResultCode {
      */
     SUCCESS(10000, "请求成功"),
     FAILED(10001, "操作失败"),
+    PARAM_ERROR(10003,"参数错误"),
     TOKEN_FAILED(10002, "token失效"),
 
     NONE(99999, "无");
