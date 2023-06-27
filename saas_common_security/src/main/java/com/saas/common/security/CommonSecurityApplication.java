@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan({"com.oms.saas.platform_management.Mapper"})
+@MapperScan({"com.saas.common.security.Mapper"})
 public class CommonSecurityApplication {
 
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.saas.common.security.Controller;
+package com.saas.common.security.controller;
 
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
