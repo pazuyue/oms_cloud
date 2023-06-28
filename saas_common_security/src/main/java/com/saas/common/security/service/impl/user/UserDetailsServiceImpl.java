@@ -3,7 +3,7 @@ package com.saas.common.security.service.impl.user;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.saas.common.security.entity.User.SysUser;
 import com.saas.common.security.mapper.User.SysUserMapper;
-import com.saas.common.security.vo.LoginUser;
+import com.saas.common.security.vo.user.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

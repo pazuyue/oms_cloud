@@ -1,12 +1,17 @@
 import com.saas.common.security.CommonSecurityApplication;
 import com.saas.common.security.entity.User.SysUser;
 import com.saas.common.security.mapper.User.SysUserMapper;
+import com.saas.common.security.until.JwtUtils;
+import com.saas.common.security.vo.user.JwtUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Date;
+import java.util.HashMap;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {CommonSecurityApplication.class})
@@ -16,6 +21,8 @@ public class MapperTest {
     private SysUserMapper sysUserMapper;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private JwtUtils jwtUtils;
 
     @Test
     public void addUserTest() {
@@ -32,5 +39,16 @@ public class MapperTest {
         String encode = bCryptPasswordEncoder.encode("123456");
         System.out.println(encode);
         System.out.println(bCryptPasswordEncoder.matches("123456", encode));
+    }
+
+    @Test
+    public void creatJWTTest()
+    {
+        JwtUser user = new JwtUser();
+        user.setUsername("张三");
+        Date exp = new Date(System.currentTimeMillis()+60*60*24);
+        String jwt = jwtUtils.createJwt(user);
+        System.out.println(jwt);
+       System.out.println( jwtUtils.getPayLoad(jwt));
     }
 }

@@ -1,84 +1,126 @@
 package com.saas.common.security.until;
 
+import com.alibaba.fastjson2.JSON;
+import com.saas.common.security.vo.user.JwtUser;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-
+import org.springframework.util.Base64Utils;
 import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+@Component
+@Data
+@ConfigurationProperties(prefix = "config.jwt")
 public class JwtUtils {
+    //@Value("{jwt.skin.key}")
+    //key的大小必须大于或等于256bit,需要32位英文字符，一个英文字符为：8bit,一个中文字符为12bit
+    private String secret;
+    private Long expire;
+    //设置加密算法
+    private SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+    //获取header中的数据
+    private final Integer GET_HEADER_DATA = 0;
+    //获取payload中的数据
+    private final Integer GET_PAYLOAD_DATA = 1;
 
-    private static final Logger log = LoggerFactory.getLogger(JwtUtils.class);
+    /**
+     * 获取转换后的私钥对象
+     *
+     * @return
+     */
+    public SecretKey getSecretKey() {
+        return Keys.hmacShaKeyFor(secret.getBytes());
+    }
 
-    //密钥
-    private static String sign ="cuAihCz53DZRjZwbsGcZJ2Ai6At+T142uphtJMsk7iQ=";
-    //生成token
-    public String generateToken(Authentication authentication) {
-        //用户的核心标识
-        String username = authentication.getName();
-        // 过期时间 - 30分钟
-        Date expireDate = new Date(System.currentTimeMillis() + 30 * 60 * 1000);
-        String token = Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(expireDate)
-                .signWith(generalKeyByDecoders())  //设置token加密方式和密
+    /**
+     * 生成JWT
+     *
+     * @param user
+     * @return
+     */
+    public String createJwt(JwtUser user) {
+        Map map = new HashMap();
+        map.put("user", user);
+        return Jwts.builder()
+                .setClaims(map)//设置携带参数
+                .setIssuedAt(new Date(System.currentTimeMillis()))//创建时间
+                .setExpiration(new Date(System.currentTimeMillis() + expire * 1000))//过期时间
+                .signWith(getSecretKey(), signatureAlgorithm)//设置加密算法和私钥
                 .compact();
-        return token;
-    }
-
-    public static SecretKey generalKeyByDecoders() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(sign));
     }
 
     /**
-     * 解密token
-     * @param token
+     * 解析JWS，返回一个布尔结果
+     *
+     * @param jwsString
      * @return
      */
-    public String getUsernameFromJWT(String token) {
-        JwtParserBuilder builder = Jwts.parserBuilder();
-        Jws<Claims> claimsJws = builder
-                .setSigningKey(generalKeyByDecoders())
-                .build()
-                .parseClaimsJws(token);
-        return claimsJws.getBody().getSubject();
-    }
-
-    /**
-     * 校验token
-     * @param token
-     * @return
-     */
-    public boolean validateToken(String token) {
-        log.error("验证 token  {}", token);
+    public Boolean parseJwt(String jwsString) {
+        boolean result = false;
         try {
-            JwtParserBuilder builder = Jwts.parserBuilder();
-
-            Jws<Claims> claimsJws = builder
-                    .setSigningKey(generalKeyByDecoders())
+            Jwts.parserBuilder()
+                    .setSigningKey(getSecretKey())//设置私钥
                     .build()
-                    .parseClaimsJws(token);
-            return true;
-        } catch (ExpiredJwtException e) {
-            Claims claims = e.getClaims();
-            // 检查token
-            throw new BadCredentialsException("TOKEN已过期，请重新登录！");
-        } catch (AuthenticationException e) {
-            throw new AuthenticationCredentialsNotFoundException("JWT was expired or incorrect");
-        } catch (Exception ex) {
-            log.error("token认证失败 {}", ex.getMessage());
-            throw new AuthenticationCredentialsNotFoundException("JWT was expired or incorrect");
+                    .parseClaimsJws(jwsString);//要解析的jws
+            result = true;
+        } catch (JwtException e) {
+            e.getMessage();
         }
+        return result;
+    }
+
+
+    public String getJson(String jwsString, Integer code) {
+        //判断解析结果如果失败返回空，如果有全局异常处理，此处可抛自定义异常进行处理
+        if (!parseJwt(jwsString)) return null;
+        //将jws中的数据编码串截取出来使用Base64解析成字节数组
+        byte[] decodePayLoad = Base64Utils.decodeFromString(jwsString.split("\\.")[code]);
+        return new String(decodePayLoad);
+    }
+
+    public Map<String, Object> getData(String jwsString, Integer code) {
+        //此处使用的阿里的fastJson,可使用其他的工具将字节json字节转map
+        return JSON.parseObject(getJson(jwsString, code), Map.class);
+    }
+
+    /**
+     * 获取header中的数据
+     *
+     * @param jwsString
+     * @return
+     */
+    public Map<String, Object> getHeader(String jwsString) {
+        return getData(jwsString, GET_HEADER_DATA);
+    }
+
+    /**
+     * 获取PayLoad中携带的数据
+     *
+     * @param jwsString
+     * @return
+     */
+    public Map<String, Object> getPayLoad(String jwsString) {
+        return getData(jwsString, GET_PAYLOAD_DATA);
+    }
+
+    /**
+     * 获取除去exp和iat的数据，exp：过期时间，iat：JWT生成的时间
+     *
+     * @param jwsString
+     * @return
+     */
+    public Map<String, Object> getPayLoadALSOExcludeExpAndIat(String jwsString) {
+        Map<String, Object> map = getData(jwsString, GET_PAYLOAD_DATA);
+        map.remove("exp");
+        map.remove("iat");
+        return map;
     }
 }
+
 
 

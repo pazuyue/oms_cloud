@@ -1,4 +1,4 @@
-package com.saas.common.security.vo;
+package com.saas.common.security.vo.user;
 
 import com.saas.common.security.entity.User.SysUser;
 import lombok.AllArgsConstructor;
