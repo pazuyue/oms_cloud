@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/test")
-@RefreshScope
 public class TestController {
 
     @GetMapping("/hello")
