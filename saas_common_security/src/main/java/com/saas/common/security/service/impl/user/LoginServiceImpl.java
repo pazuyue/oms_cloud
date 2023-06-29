@@ -20,9 +20,6 @@ public class LoginServiceImpl implements LoginService {
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
-        if (ObjectUtils.isEmpty(authenticate)){
-            throw new RuntimeException("用户名或者密码错误");
-        }
         return Result.success();
     }
 }
