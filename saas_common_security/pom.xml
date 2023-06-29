@@ -31,8 +31,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>3.0.5</version>
                 <configuration>
-                    <fork>false</fork>
-                    <addResources>true</addResources>
+                  <!--  <fork>false</fork>-->
                 </configuration>
             </plugin>
         </plugins>

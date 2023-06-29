@@ -23,6 +23,6 @@ public class LoginServiceImpl implements LoginService {
         if (ObjectUtils.isEmpty(authenticate)){
             throw new RuntimeException("用户名或者密码错误");
         }
-        return null;
+        return Result.success();
     }
 }
