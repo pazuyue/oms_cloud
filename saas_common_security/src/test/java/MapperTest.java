@@ -3,6 +3,7 @@ import com.saas.common.security.entity.User.SysUser;
 import com.saas.common.security.mapper.User.SysUserMapper;
 import com.saas.common.security.until.JwtUtils;
 import com.saas.common.security.vo.user.JwtUser;
+import com.saas.common.security.vo.user.LoginUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,13 +43,9 @@ public class MapperTest {
     }
 
     @Test
-    public void creatJWTTest()
-    {
-        JwtUser user = new JwtUser();
-        user.setUsername("张三");
-        Date exp = new Date(System.currentTimeMillis()+60*60*24);
-        String jwt = jwtUtils.createJwt(user);
+    public void creatJWTTest() {
+        String jwt = jwtUtils.createJwt("1");
         System.out.println(jwt);
-       System.out.println( jwtUtils.getPayLoad(jwt));
+        System.out.println(jwtUtils.getPayLoad(jwt));
     }
 }

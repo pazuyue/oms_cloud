@@ -1,7 +1,9 @@
 package com.saas.common.security.until;
 
 import com.alibaba.fastjson2.JSON;
+import com.saas.common.security.entity.User.SysUser;
 import com.saas.common.security.vo.user.JwtUser;
+import com.saas.common.security.vo.user.LoginUser;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.Data;
@@ -40,14 +42,12 @@ public class JwtUtils {
     /**
      * 生成JWT
      *
-     * @param user
+     * @param user_id
      * @return
      */
-    public String createJwt(JwtUser user) {
-        Map map = new HashMap();
-        map.put("user", user);
+    public String createJwt(String user_id) {
         return Jwts.builder()
-                .setClaims(map)//设置携带参数
+                .setId(user_id)//设置携带参数
                 .setIssuedAt(new Date(System.currentTimeMillis()))//创建时间
                 .setExpiration(new Date(System.currentTimeMillis() + expire * 1000))//过期时间
                 .signWith(getSecretKey(), signatureAlgorithm)//设置加密算法和私钥

@@ -166,6 +166,7 @@
         </dependency>
 
 
+        <!-- 注解处理器-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
