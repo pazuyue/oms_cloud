@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {CommonSecurityApplication.class})
@@ -46,6 +47,7 @@ public class MapperTest {
     public void creatJWTTest() {
         String jwt = jwtUtils.createJwt("1");
         System.out.println(jwt);
-        System.out.println(jwtUtils.getPayLoad(jwt));
+        Map<String, Object> map = jwtUtils.getPayLoadALSOExcludeExpAndIat(jwt);
+        System.out.println(map.get("user_id"));
     }
 }

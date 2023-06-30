@@ -9,8 +9,8 @@ import io.jsonwebtoken.security.Keys;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Base64Utils;
 import javax.crypto.SecretKey;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,8 +46,10 @@ public class JwtUtils {
      * @return
      */
     public String createJwt(String user_id) {
+        Map map =new HashMap();
+        map.put("user_id",user_id);
         return Jwts.builder()
-                .setId(user_id)//设置携带参数
+                .setClaims(map)//设置携带参数
                 .setIssuedAt(new Date(System.currentTimeMillis()))//创建时间
                 .setExpiration(new Date(System.currentTimeMillis() + expire * 1000))//过期时间
                 .signWith(getSecretKey(), signatureAlgorithm)//设置加密算法和私钥
@@ -79,7 +81,8 @@ public class JwtUtils {
         //判断解析结果如果失败返回空，如果有全局异常处理，此处可抛自定义异常进行处理
         if (!parseJwt(jwsString)) return null;
         //将jws中的数据编码串截取出来使用Base64解析成字节数组
-        byte[] decodePayLoad = Base64Utils.decodeFromString(jwsString.split("\\.")[code]);
+        //byte[] decodePayLoad = Base64Utils.decodeFromString(jwsString.split("\\.")[code]);
+        byte[] decodePayLoad = Base64.getDecoder().decode(jwsString.split("\\.")[code]);
         return new String(decodePayLoad);
     }
 

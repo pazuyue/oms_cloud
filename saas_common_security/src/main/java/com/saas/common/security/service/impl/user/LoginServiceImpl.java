@@ -33,7 +33,7 @@ public class LoginServiceImpl implements LoginService {
         LoginUser loginUser = (LoginUser)authenticate.getPrincipal();
         String user_id = loginUser.getSysUser().getId().toString();
         String jwt = jwtUtils.createJwt(user_id);
-        redisCache.setCacheObject("login:"+user_id,loginUser,60, TimeUnit.SECONDS);
+        redisCache.setCacheObject("login:"+user_id,loginUser.getSysUser(),600, TimeUnit.SECONDS);
         return Result.success(jwt);
     }
 }
