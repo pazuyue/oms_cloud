@@ -1,11 +1,11 @@
 spring:
   application:
-    name: oms_platform_management
+    name: OmsPlatformManagement
   host: 127.0.0.1
   cloud:
     nacos:
       discovery:
-        server-addr: ${spring.host:127.0.0.1}:8848
+        serverAddr: ${spring.host:127.0.0.1}:8848
       config:
         serverAddr:  ${spring.host:127.0.0.1}:8848
         file-extension: yaml

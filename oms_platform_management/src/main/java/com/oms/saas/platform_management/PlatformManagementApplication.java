@@ -13,12 +13,6 @@ import org.springframework.web.client.RestTemplate;
 @MapperScan({"com.oms.saas.platform_management.Mapper"})
 public class PlatformManagementApplication {
 
-    @LoadBalanced
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(PlatformManagementApplication.class, args);
     }
