@@ -19,4 +19,10 @@ public class LoginController {
         System.out.println(user.toString());
         return loginService.login(user);
     }
+
+    @PostMapping("/logout")
+    @ResponseBody
+    public Result logout(){
+        return loginService.logout();
+    }
 }

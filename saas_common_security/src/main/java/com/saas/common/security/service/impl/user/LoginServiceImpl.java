@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -35,5 +36,14 @@ public class LoginServiceImpl implements LoginService {
         String jwt = jwtUtils.createJwt(user_id);
         redisCache.setCacheObject("login:"+user_id,loginUser.getSysUser(),600, TimeUnit.SECONDS);
         return Result.success(jwt);
+    }
+
+    @Override
+    public Result logout() {
+        UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken)SecurityContextHolder.getContext().getAuthentication();
+        SysUser sysUser = (SysUser)authentication.getPrincipal();
+        String redisKey = "login:"+sysUser.getId();
+        redisCache.deleteObject(redisKey);
+        return Result.success();
     }
 }

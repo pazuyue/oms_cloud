@@ -6,4 +6,6 @@ import com.saas.common.security.entity.User.SysUser;
 public interface LoginService {
 
     public Result login(SysUser user);
+
+    public Result logout();
 }
