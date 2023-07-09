@@ -1,6 +1,6 @@
 spring:
   application:
-    name: common_security
+    name: commonSecurity
   host: 127.0.0.1
   cloud:
     nacos:
