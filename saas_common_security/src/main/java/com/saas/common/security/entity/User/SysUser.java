@@ -62,6 +62,11 @@ public class SysUser implements Serializable {
     private String avatar;
 
     /**
+     * 公司编码
+     */
+    private String company_code;
+
+    /**
      * 1 普通会员 2管理员
      */
     private Byte userType;

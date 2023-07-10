@@ -2,8 +2,6 @@ import com.saas.common.security.CommonSecurityApplication;
 import com.saas.common.security.entity.User.SysUser;
 import com.saas.common.security.mapper.User.SysUserMapper;
 import com.saas.common.security.until.JwtUtils;
-import com.saas.common.security.vo.user.JwtUser;
-import com.saas.common.security.vo.user.LoginUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
