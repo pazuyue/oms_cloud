@@ -43,22 +43,43 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
-                .csrf().disable()
-                // 使用无状态session，即不使用session缓存数据
-                .sessionManagement().sessionCreationPolicy((SessionCreationPolicy.STATELESS))
-                .and()
+                .csrf()
+                .disable() //关闭csrf(跨域)
                 .authorizeHttpRequests()
-                .requestMatchers("/userManage/register").permitAll()
-                .requestMatchers("/user/**").permitAll()
-                .anyRequest().authenticated();
-        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+                //配置需要放行的路径
+                .requestMatchers(
+                        "/userManage/register",
+                        "/test/hello",
+                        "/user/**"
+                )
+                .permitAll() //放行上述的所有路径
+
+                /*
+                 * 权限校验(需要登录的用户有指定的权限才可以)
+                 * requestMatchers: 指定需要拦截的路径
+                 * hasAnyAuthority: 指定需要的权限
+                 */
+                //.requestMatchers("/api/v1/management/**").hasAnyRole(ADMIN.name(), MANAGER.name())
+                //.requestMatchers(GET, "/api/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
+                //.requestMatchers(POST, "/api/v1/management/**").hasAnyAuthority(ADMIN_CREATE.name(), MANAGER_CREATE.name())
+                //.requestMatchers(PUT, "/api/v1/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
+                //.requestMatchers(DELETE, "/api/v1/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())
+                .anyRequest()
+                .authenticated() //设置所有的请求都需要验证
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //使用无状态Session
+                .and()
+                //添加jwt过滤器
+                .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         http.exceptionHandling(it -> it.authenticationEntryPoint((request, response, authException) -> {
             response.setContentType("application/json;charset=utf-8");
             response.setStatus(HttpStatus.FORBIDDEN.value());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             PrintWriter writer = response.getWriter();
-            writer.write(JSON.toJSONString(Result.failed("鉴权失败")));
+            writer.write(JSON.toJSONString(Result.failed(authException.getMessage())));
             writer.flush();
             writer.close();
         }));
