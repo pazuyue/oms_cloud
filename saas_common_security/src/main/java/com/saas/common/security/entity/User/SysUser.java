@@ -3,6 +3,9 @@ package com.saas.common.security.entity.User;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,6 +18,7 @@ import java.util.Date;
  * @since 2023-06-27
  */
 @TableName("sys_user")
+@Data
 public class SysUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,16 +28,19 @@ public class SysUser implements Serializable {
     /**
      * 用户名
      */
+    @NotBlank(message = "用户名不能为空")
     private String userName;
 
     /**
      * 昵称
      */
+    @NotBlank(message = "昵称不能为空")
     private String nickName;
 
     /**
      * 密码
      */
+    @NotBlank(message = "密码不能为空")
     private String password;
 
     /**
@@ -72,118 +79,4 @@ public class SysUser implements Serializable {
     private Byte userType;
     private Date createTime;
     private Date modifyTime;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Byte getSex() {
-        return sex;
-    }
-
-    public void setSex(Byte sex) {
-        this.sex = sex;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public Byte getUserType() {
-        return userType;
-    }
-
-    public void setUserType(Byte userType) {
-        this.userType = userType;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getModifyTime() {
-        return modifyTime;
-    }
-
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
-
-    @Override
-    public String toString() {
-        return "SysUser{" +
-        ", id = " + id +
-        ", userName = " + userName +
-        ", nickName = " + nickName +
-        ", password = " + password +
-        ", status = " + status +
-        ", email = " + email +
-        ", phone = " + phone +
-        ", sex = " + sex +
-        ", avatar = " + avatar +
-        ", userType = " + userType +
-        ", createTime = " + createTime +
-        ", modifyTime = " + modifyTime +
-        "}";
-    }
 }
