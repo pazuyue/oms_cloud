@@ -34,4 +34,11 @@ public class ParamException {
         System.out.println("handleConstraintViolationException:"+ex.getMessage());
         return Result.failed(ResultCode.PARAM_ERROR,ex.getMessage());
     }
+
+    @ExceptionHandler({RuntimeException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Result handleRuntimeException(RuntimeException ex) {
+        System.out.println("RuntimeException:"+ex.getMessage());
+        return Result.failed(ResultCode.FAILED,ex.getMessage());
+    }
 }

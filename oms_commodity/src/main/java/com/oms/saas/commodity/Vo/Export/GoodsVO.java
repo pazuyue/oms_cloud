@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Goods {
+public class GoodsVO {
     @Excel(name = "SKU(系统唯一，≤30位，可英文数字符号（除空格外），必填)", width = 20)
     private String skuSn;
     @Excel(name = "条形码(系统唯一，可支持英文数字、“-”、“_”，≤30位数字，必填)", width = 20)

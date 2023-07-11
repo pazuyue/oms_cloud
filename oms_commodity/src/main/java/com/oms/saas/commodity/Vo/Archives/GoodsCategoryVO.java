@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class GoodsCategory implements Serializable {
+public class GoodsCategoryVO implements Serializable {
     private Integer id;
     /**
      * 关联品牌
@@ -19,6 +19,12 @@ public class GoodsCategory implements Serializable {
      */
     @NotBlank(message = "分类名称不能为空")
     private String name;
+
+    /**
+     * 公司编码
+     */
+    @NotBlank(message = "公司编码不能为空")
+    private String companyCode;
     /**
      * 父id
      */
