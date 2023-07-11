@@ -46,7 +46,7 @@ public class TestController {
         HttpEntity<Result> httpEntity = new HttpEntity<>( headers);
         //return restTemplate.getForObject("http://commonSecurity/user/userInfo", Result.class,httpEntity);
         //3. 有请求头，没参数，result3.getBody()获取响应参数
-        ResponseEntity<Result> result = restTemplate.exchange("http://commonSecurity/user/userInfo", HttpMethod.GET, httpEntity, Result.class);
+        ResponseEntity<Result> result = restTemplate.exchange("http://OmsCommodity/test/echo/hello", HttpMethod.GET, httpEntity, Result.class);
         return result;
     }
 }
