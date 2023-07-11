@@ -41,4 +41,11 @@ public class ParamException {
         System.out.println("RuntimeException:"+ex.getMessage());
         return Result.failed(ResultCode.FAILED,ex.getMessage());
     }
+
+    @ExceptionHandler({Exception.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Result handleRuntimeException(Exception ex) {
+        System.out.println("Exception:"+ex.getMessage());
+        return Result.failed(ResultCode.FAILED,ex.getMessage());
+    }
 }
