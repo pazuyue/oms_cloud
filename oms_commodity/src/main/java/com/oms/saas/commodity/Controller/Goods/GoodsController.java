@@ -30,8 +30,11 @@ public class GoodsController {
             List<GoodsVO> goodsList = ExcelImportUtil.importExcel(
                     file.getInputStream(),
                     GoodsVO.class, params);
-            goodsService.export(goodsList);
-            return Result.success(goodsList);
+            boolean b = goodsService.export(goodsList);
+            if (b){
+                return Result.success();
+            }
+          return Result.failed("导入失败");
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failed("导入失败！");
