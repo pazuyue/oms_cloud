@@ -29,4 +29,9 @@ public class GoodsCategoryServiceImpl implements GoodsCategoryService {
 
         return goodsCategoryMapper.insert(goodsCategory);
     }
+
+    @Override
+    public int deleteById(int id) {
+        return goodsCategoryMapper.deleteById(id);
+    }
 }
