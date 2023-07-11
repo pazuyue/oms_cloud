@@ -5,7 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.oms.saas.commodity.Entity.Archives.GoodsCategory;
 import com.oms.saas.commodity.Vo.Archives.GoodsCategoryVO;
 import com.oms.saas.commodity.api.Result;
-import com.oms.saas.commodity.service.GoodsCategoryService;
+import com.oms.saas.commodity.service.Goods.GoodsCategoryService;
 import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

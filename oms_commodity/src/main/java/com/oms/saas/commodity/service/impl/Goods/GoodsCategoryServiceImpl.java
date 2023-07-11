@@ -1,10 +1,9 @@
-package com.oms.saas.commodity.service.impl;
+package com.oms.saas.commodity.service.impl.Goods;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.oms.saas.commodity.Entity.Archives.GoodsCategory;
 import com.oms.saas.commodity.mapper.geberator.GoodsCategoryMapper;
-import com.oms.saas.commodity.service.GoodsCategoryService;
+import com.oms.saas.commodity.service.Goods.GoodsCategoryService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
