@@ -71,6 +71,7 @@ public class SysUser implements Serializable {
     /**
      * 公司编码
      */
+    @NotBlank(message = "公司编码不能为空")
     private String company_code;
 
     /**

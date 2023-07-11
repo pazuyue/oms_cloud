@@ -73,7 +73,7 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //使用无状态Session
                 .and()
                 //添加jwt过滤器
-                .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         http.exceptionHandling(it -> it.authenticationEntryPoint((request, response, authException) -> {
             response.setContentType("application/json;charset=utf-8");
             response.setStatus(HttpStatus.FORBIDDEN.value());

@@ -22,26 +22,19 @@ import java.util.Map;
 public class UserController {
 
     @Resource
-   private UserManageService userManageService;
+    private UserManageService userManageService;
 
     @GetMapping("/userInfo")
-    public Result userInfo(@RequestHeader("token") String token){
-        if (!StringUtils.hasText(token)){
+    public Result userInfo(@RequestHeader("token") String token) {
+        if (!StringUtils.hasText(token)) {
             return Result.failed("未登录，请先登录");
         }
         SysUser sysUser = userManageService.getUserInfoByToken(token);
-        if (ObjectUtils.isEmpty(sysUser)){
+        if (ObjectUtils.isEmpty(sysUser)) {
             return Result.failed("未登录，请先登录");
         }
         return Result.success(sysUser);
     }
 
-    @PostMapping("/register")
-    public Result register(@Validated SysUser sysUser){
-       int id = userManageService.register(sysUser);
-       if (id>0){
-           return Result.success();
-       }
-        return Result.failed("注册失败");
-    }
+
 }
