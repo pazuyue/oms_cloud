@@ -1,6 +1,7 @@
 package com.oms.saas.commodity.Vo.Export;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,6 +15,7 @@ public class GoodsVO {
     @Excel(name = "条形码(系统唯一，可支持英文数字、“-”、“_”，≤30位数字，必填)", width = 20)
     private String barcodeSn;
     @Excel(name = "货号(系统唯一，≤30位，可英文数字符号（除空格外），必填)", width = 20)
+    @NotBlank(message = "货号不能为空")
     private String goodsSn;
     @Excel(name = "商品名称(≤100字符，不限格式，必填)", width = 20)
     private String goodsName;

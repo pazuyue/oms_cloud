@@ -22,7 +22,7 @@ public class GoodsSkuSnInfoTmp implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     /**
      * sku
@@ -109,5 +109,10 @@ public class GoodsSkuSnInfoTmp implements Serializable {
      * 修改时间
      */
     private Date modifyTime;
+
+    /**
+     * 导入说明
+     */
+    private String notes;
 
 }
