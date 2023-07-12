@@ -3,6 +3,7 @@ package com.oms.saas.commodity.Config;
 
 import com.oms.saas.commodity.api.Result;
 import com.oms.saas.commodity.api.ResultCode;
+import jakarta.validation.ConstraintDeclarationException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -34,6 +35,14 @@ public class ParamException {
         System.out.println("handleConstraintViolationException:"+ex.getMessage());
         return Result.failed(ResultCode.PARAM_ERROR,ex.getMessage());
     }
+
+    @ExceptionHandler({ConstraintDeclarationException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Result handleConstraintDeclarationException(ConstraintDeclarationException ex) {
+        System.out.println("handleConstraintViolationException:"+ex.getMessage());
+        return Result.failed(ResultCode.PARAM_ERROR,ex.getMessage());
+    }
+
 
     @ExceptionHandler({RuntimeException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
