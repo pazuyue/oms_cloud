@@ -24,6 +24,7 @@ public class GoodsSkuSnInfoTmp implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    private String importBatch;
     /**
      * sku
      */

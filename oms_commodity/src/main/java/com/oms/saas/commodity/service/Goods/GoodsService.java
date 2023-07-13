@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface GoodsService extends IService<GoodsSkuSnInfoTmp> {
     public boolean export(List<GoodsVO> list);
+    public boolean export(List<GoodsVO> list,String importBatch);
 }

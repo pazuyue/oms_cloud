@@ -1,7 +1,9 @@
 package com.oms.saas.commodity.service.impl.Goods;
 
 import cn.hutool.core.lang.Console;
-import com.alibaba.fastjson2.JSON;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.oms.saas.commodity.Entity.Goods.GoodsSkuSnInfoTmp;
 import com.oms.saas.commodity.Vo.Export.GoodsVO;
@@ -19,11 +21,30 @@ import java.util.Set;
 @Service
 public class GoodsServiceImpl extends ServiceImpl<GoodsSkuSnInfoTmpMapper,GoodsSkuSnInfoTmp> implements GoodsService {
 
+    @Override
     public boolean export(List<GoodsVO> list) {
+        return this.saveGoodsSkuSnInfoTmp(list);
+    }
+
+    @Override
+    public boolean export(List<GoodsVO> list, String importBatch) {
+        if (!ObjectUtil.isEmpty(importBatch))
+        {
+            QueryWrapper queryWrapper = new QueryWrapper();
+            queryWrapper.eq("import_batch",importBatch);
+            this.remove(queryWrapper);
+        }
+        return this.saveGoodsSkuSnInfoTmp(list);
+    }
+
+    public boolean saveGoodsSkuSnInfoTmp(List<GoodsVO> list)
+    {
         List<GoodsSkuSnInfoTmp> goodsSkuSnInfoTmpList = new ArrayList<>();
+        String importBatch = IdUtil.simpleUUID();
         list.forEach(vo->{
             String s = this.checkGoodsVO(vo);
             GoodsSkuSnInfoTmp goodsSkuSnInfoTmp = new GoodsSkuSnInfoTmp();
+            goodsSkuSnInfoTmp.setImportBatch(importBatch);
             goodsSkuSnInfoTmp.setSkuSn(vo.getGoodsSn());
             goodsSkuSnInfoTmp.setGoodsSn(vo.getGoodsSn());
             goodsSkuSnInfoTmp.setBarcodeSn(vo.getBarcodeSn());
