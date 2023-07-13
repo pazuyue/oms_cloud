@@ -14,12 +14,6 @@ import org.springframework.web.client.RestTemplate;
 @MapperScan({"com.oms.saas.commodity.mapper.*"})
 public class OmsCommodityApplication {
 
-    @LoadBalanced
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(OmsCommodityApplication.class, args);
     }
