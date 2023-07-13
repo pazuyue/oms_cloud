@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.oms.saas.commodity.Entity.Goods.GoodsSkuSnInfoTmp;
 import com.oms.saas.commodity.Vo.Export.GoodsVO;
@@ -30,11 +31,29 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsSkuSnInfoTmpMapper,GoodsS
     public boolean export(List<GoodsVO> list, String importBatch) {
         if (!ObjectUtil.isEmpty(importBatch))
         {
-            QueryWrapper queryWrapper = new QueryWrapper();
+            QueryWrapper<GoodsSkuSnInfoTmp> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("import_batch",importBatch);
             this.remove(queryWrapper);
         }
         return this.saveGoodsSkuSnInfoTmp(list);
+    }
+
+    @Override
+    public Page<GoodsSkuSnInfoTmp> exportList(String importBatch,Integer page,Integer pageSize) {
+        QueryWrapper<GoodsSkuSnInfoTmp> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("import_batch",importBatch);
+        return this.page(new Page<>(page, pageSize),queryWrapper);
+    }
+
+    @Override
+    public boolean toExamine(String importBatch) {
+        QueryWrapper<GoodsSkuSnInfoTmp> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("notes","正常");
+        GoodsSkuSnInfoTmp infoTmp = this.getOne(queryWrapper);
+        if (!ObjectUtil.isEmpty(infoTmp)){
+            throw new RuntimeException("审核失败，请先处理异常导入信息");
+        }
+        return false;
     }
 
     public boolean saveGoodsSkuSnInfoTmp(List<GoodsVO> list)
