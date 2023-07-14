@@ -1,4 +1,4 @@
-package com.oms.saas.commodity.entity.Goods;
+package com.oms.saas.commodity.Entity.Goods;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

@@ -66,11 +66,6 @@ public class GoodsSkuSnInfoTmp implements Serializable {
     private String marketPrice;
 
     /**
-     * 需要有效期管理
-     */
-    private String isNeedEffect;
-
-    /**
      * 有效期
      */
     private String validity;
@@ -89,7 +84,6 @@ public class GoodsSkuSnInfoTmp implements Serializable {
      * 是否赠品
      */
     private String isGift;
-    private Date deletedAt;
 
     /**
      * 批次号

@@ -26,6 +26,7 @@ public class GoodsController {
     private GoodsService goodsService;
     @Value("${pageable.page.size:10}")
     private Integer pageSize;
+
     /**
      * 商品导入
      * @param file
@@ -52,6 +53,12 @@ public class GoodsController {
         return Result.failed("导入失败");
     }
 
+    /**
+     * 导入明细
+     * @param importBatch
+     * @param page
+     * @return
+     */
     @SneakyThrows
     @PostMapping(value = "/list")
     @ResponseBody

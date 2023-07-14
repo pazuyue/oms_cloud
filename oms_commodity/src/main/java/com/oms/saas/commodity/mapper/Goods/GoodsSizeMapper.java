@@ -1,6 +1,6 @@
 package com.oms.saas.commodity.mapper.Goods;
 
-import com.oms.saas.commodity.entity.Goods.GoodsSize;
+import com.oms.saas.commodity.Entity.Goods.GoodsSize;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
