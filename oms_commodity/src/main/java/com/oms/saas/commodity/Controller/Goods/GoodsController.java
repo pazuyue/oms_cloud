@@ -2,20 +2,18 @@ package com.oms.saas.commodity.Controller.Goods;
 
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
-import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.oms.saas.commodity.Entity.Goods.GoodsSkuSnInfoTmp;
 import com.oms.saas.commodity.Vo.Export.GoodsVO;
 import com.oms.saas.commodity.api.Result;
-import com.oms.saas.commodity.service.Goods.GoodsService;
+import com.oms.saas.commodity.service.Goods.GoodsSkuSnInfoService;
+import com.oms.saas.commodity.service.Goods.GoodsSkuSnInfoTmpService;
 import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -23,7 +21,9 @@ import java.util.List;
 public class GoodsController {
 
     @Resource
-    private GoodsService goodsService;
+    private GoodsSkuSnInfoTmpService goodsSkuSnInfoTmpService;
+    @Resource
+    private GoodsSkuSnInfoService goodsSkuSnInfoService;
     @Value("${pageable.page.size:10}")
     private Integer pageSize;
 
@@ -42,9 +42,9 @@ public class GoodsController {
                 GoodsVO.class, params);
         boolean b;
         if (ObjectUtil.isEmpty(import_batch)){
-            b= goodsService.export(goodsList);
+            b= goodsSkuSnInfoTmpService.export(goodsList);
         }else {
-            b = goodsService.export(goodsList,import_batch);
+            b = goodsSkuSnInfoTmpService.export(goodsList,import_batch);
         }
 
         if (b){
@@ -64,7 +64,15 @@ public class GoodsController {
     @ResponseBody
     public Result exportList(@RequestParam(value = "import_batch") String importBatch,@RequestParam(value = "page",defaultValue = "1") Integer page)
     {
-        Page<GoodsSkuSnInfoTmp> list = goodsService.exportList(importBatch, page, pageSize);
+        Page<GoodsSkuSnInfoTmp> list = goodsSkuSnInfoTmpService.exportList(importBatch, page, pageSize);
         return Result.success(list);
+    }
+
+    @SneakyThrows
+    @PostMapping(value = "/toExamine")
+    @ResponseBody
+    public Result toExamine(String importBatch){
+        boolean b = goodsSkuSnInfoService.toExamine(importBatch);
+        return b ? Result.success() : Result.failed("审核失败");
     }
 }

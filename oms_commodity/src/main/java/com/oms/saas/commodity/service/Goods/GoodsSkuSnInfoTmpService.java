@@ -7,7 +7,7 @@ import com.oms.saas.commodity.Vo.Export.GoodsVO;
 
 import java.util.List;
 
-public interface GoodsService extends IService<GoodsSkuSnInfoTmp> {
+public interface GoodsSkuSnInfoTmpService extends IService<GoodsSkuSnInfoTmp> {
     /**
      * 导入
      * @param list
@@ -30,11 +30,6 @@ public interface GoodsService extends IService<GoodsSkuSnInfoTmp> {
      */
     public Page<GoodsSkuSnInfoTmp> exportList(String importBatch,Integer page,Integer pageSize);
 
-    /**
-     * 审核
-     * @param importBatch
-     * @return
-     */
-    public boolean toExamine(String importBatch);
+
 
 }

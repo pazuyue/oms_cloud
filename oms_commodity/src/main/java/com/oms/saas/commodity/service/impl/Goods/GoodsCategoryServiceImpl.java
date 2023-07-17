@@ -1,6 +1,7 @@
 package com.oms.saas.commodity.service.impl.Goods;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.oms.saas.commodity.Entity.Archives.GoodsCategory;
 import com.oms.saas.commodity.mapper.geberator.GoodsCategoryMapper;
 import com.oms.saas.commodity.service.Goods.GoodsCategoryService;
@@ -32,5 +33,12 @@ public class GoodsCategoryServiceImpl implements GoodsCategoryService {
     @Override
     public int deleteById(int id) {
         return goodsCategoryMapper.deleteById(id);
+    }
+
+    public Integer selectCategoryCode(String categoryName)
+    {
+        QueryWrapper<GoodsCategory> queryWrapper = new QueryWrapper();
+        queryWrapper.eq("name",categoryName).eq("level",3);
+        return goodsCategoryMapper.selectOne(queryWrapper).getId();
     }
 }

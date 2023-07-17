@@ -16,4 +16,11 @@ public interface GoodsCategoryService {
      * @return
      */
     public int deleteById(int id);
+
+    /**
+     * 根据类目名称返回类名CODE
+     * @param categoryName
+     * @return
+     */
+    public Integer selectCategoryCode(String categoryName);
 }

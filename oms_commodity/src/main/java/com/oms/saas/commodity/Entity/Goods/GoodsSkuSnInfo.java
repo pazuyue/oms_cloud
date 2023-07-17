@@ -1,4 +1,4 @@
-package com.oms.saas.commodity.Entity.Goods;
+package com.oms.saas.commodity.entity.Goods;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -11,21 +11,20 @@ import java.util.Date;
 
 /**
  * <p>
- * 产品信息临时表
+ * 产品信息表
  * </p>
  *
  * @author 月光光
- * @since 2023-07-11
+ * @since 2023-07-17
  */
-@TableName("goods_sku_sn_info_tmp")
+@TableName("goods_sku_sn_info")
 @Data
-public class GoodsSkuSnInfoTmp implements Serializable {
+public class GoodsSkuSnInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
-    private String importBatch;
     /**
      * sku
      */
@@ -47,25 +46,34 @@ public class GoodsSkuSnInfoTmp implements Serializable {
     private String goodsName;
 
     /**
+     * 品牌编码
+     */
+    private String brandCode;
+
+    /**
+     * 品牌名
+     */
+    private String brandName;
+
+    /**
      * 类目code
      */
-    private String categoryCode;
+    private Integer categoryCode;
 
     /**
      * 颜色编码
      */
-    private String colorCode;
+    private Integer colorCode;
 
     /**
-     * 尺码
+     * 尺码,goods_size.id
      */
-    private String sizeCode;
+    private Integer sizeCode;
 
     /**
      * 市场价（吊牌价）
      */
     private BigDecimal marketPrice;
-
     /**
      * 有效期
      */
@@ -77,19 +85,14 @@ public class GoodsSkuSnInfoTmp implements Serializable {
     private String goodsDesc;
 
     /**
-     * 是否福袋,
+     * 是否福袋,0 不是福袋，1是福袋
      */
     private Byte isFd;
 
     /**
-     * 是否赠品
+     * 0为非赠口，1为赠品
      */
     private Byte isGift;
-
-    /**
-     * 批次号
-     */
-    private String batchId;
 
     /**
      * 公司编码
@@ -107,8 +110,17 @@ public class GoodsSkuSnInfoTmp implements Serializable {
     private Date modifyTime;
 
     /**
-     * 导入说明
+     * 0正常商品，1套装商品
      */
-    private String notes;
+    private Byte isPackage;
 
+    /**
+     * 创建套装的用户编码
+     */
+    private String createPackageUser;
+
+    /**
+     * 商品描述
+     */
+    private String description;
 }

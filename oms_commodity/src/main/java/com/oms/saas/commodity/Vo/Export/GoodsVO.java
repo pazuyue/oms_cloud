@@ -35,7 +35,7 @@ public class GoodsVO {
     private String sizeName;
     @Excel(name = "市场价(吊牌价，≥0，必填)", width = 20)
     @NotBlank(message = "市场价不能为空")
-    private String marketPrice;
+    private BigDecimal marketPrice;
     @Excel(name = "有效期(填写整数，需≥0，单位：天)", width = 20)
     private Integer validity;
     @Excel(name = "商品描述(非必填)", width = 20)

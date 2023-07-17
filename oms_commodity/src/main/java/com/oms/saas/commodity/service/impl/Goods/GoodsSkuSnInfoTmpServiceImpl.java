@@ -9,10 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.oms.saas.commodity.Entity.Goods.GoodsSkuSnInfoTmp;
 import com.oms.saas.commodity.Vo.Export.GoodsVO;
 import com.oms.saas.commodity.mapper.Goods.GoodsSkuSnInfoTmpMapper;
-import com.oms.saas.commodity.service.Goods.GoodsColorService;
-import com.oms.saas.commodity.service.Goods.GoodsService;
-import com.oms.saas.commodity.service.Goods.GoodsSizeService;
-import jakarta.annotation.Resource;
+import com.oms.saas.commodity.service.Goods.GoodsSkuSnInfoTmpService;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -23,13 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class GoodsServiceImpl extends ServiceImpl<GoodsSkuSnInfoTmpMapper,GoodsSkuSnInfoTmp> implements GoodsService {
-
-    @Resource
-    GoodsColorService goodsColorService;
-
-    @Resource
-    GoodsSizeService goodsSizeService;
+public class GoodsSkuSnInfoTmpServiceImpl extends ServiceImpl<GoodsSkuSnInfoTmpMapper,GoodsSkuSnInfoTmp> implements GoodsSkuSnInfoTmpService {
 
     @Override
     public boolean export(List<GoodsVO> list) {
@@ -53,29 +44,6 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsSkuSnInfoTmpMapper,GoodsS
         queryWrapper.eq("import_batch",importBatch);
         return this.page(new Page<>(page, pageSize),queryWrapper);
     }
-
-    @Override
-    public boolean toExamine(String importBatch) {
-        QueryWrapper<GoodsSkuSnInfoTmp> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("notes","正常");
-        GoodsSkuSnInfoTmp infoTmp = this.getOne(queryWrapper);
-        if (!ObjectUtil.isEmpty(infoTmp)){
-            throw new RuntimeException("审核失败，请先处理异常导入信息");
-        }
-        List<GoodsSkuSnInfoTmp> list = this.list(queryWrapper);
-        for(GoodsSkuSnInfoTmp tmp:list) {
-            Integer colorCode = goodsColorService.selectOrSaveByColorName(tmp.getColorCode());
-            if (ObjectUtil.isEmpty(colorCode))
-                throw new RuntimeException("审核失败，色号处理异常");
-            Integer sizeCode = goodsSizeService.selectOrSaveBySizeName(tmp.getSizeCode());
-            if (ObjectUtil.isEmpty(sizeCode))
-                throw new RuntimeException("审核失败，尺码处理异常");
-
-        }
-        return false;
-    }
-
-
 
     public boolean saveGoodsSkuSnInfoTmp(List<GoodsVO> list)
     {
