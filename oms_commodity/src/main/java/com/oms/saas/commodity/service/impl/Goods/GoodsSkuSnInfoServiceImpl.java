@@ -50,7 +50,7 @@ public class GoodsSkuSnInfoServiceImpl extends ServiceImpl<GoodsSkuSnInfoMapper,
             Integer sizeCode = goodsSizeService.selectOrSaveBySizeName(tmp.getSizeCode());
             if (ObjectUtil.isEmpty(sizeCode))
                 throw new RuntimeException("审核失败，尺码处理异常");
-            Integer categoryCode = goodsCategoryService.selectCategoryCode(tmp.getGoodsName());
+            Integer categoryCode = goodsCategoryService.selectCategoryCode(tmp.getCategoryCode());
             if (ObjectUtil.isEmpty(categoryCode))
                 throw new RuntimeException("审核失败，类名不存在");
             GoodsSkuSnInfo goods = new GoodsSkuSnInfo();

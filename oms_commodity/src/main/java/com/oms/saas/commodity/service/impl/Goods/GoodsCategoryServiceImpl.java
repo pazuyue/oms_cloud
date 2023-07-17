@@ -40,6 +40,10 @@ public class GoodsCategoryServiceImpl implements GoodsCategoryService {
     {
         QueryWrapper<GoodsCategory> queryWrapper = new QueryWrapper();
         queryWrapper.eq("name",categoryName).eq("level",3);
+        GoodsCategory goodsCategory = goodsCategoryMapper.selectOne(queryWrapper);
+        if (ObjectUtil.isEmpty(goodsCategory)){
+            return 0;
+        }
         return goodsCategoryMapper.selectOne(queryWrapper).getId();
     }
 }
