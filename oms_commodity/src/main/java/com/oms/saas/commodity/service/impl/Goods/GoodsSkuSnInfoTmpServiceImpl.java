@@ -53,7 +53,7 @@ public class GoodsSkuSnInfoTmpServiceImpl extends ServiceImpl<GoodsSkuSnInfoTmpM
             String s = this.checkGoodsVO(vo);
             GoodsSkuSnInfoTmp goodsSkuSnInfoTmp = new GoodsSkuSnInfoTmp();
             goodsSkuSnInfoTmp.setImportBatch(importBatch);
-            goodsSkuSnInfoTmp.setSkuSn(vo.getGoodsSn());
+            goodsSkuSnInfoTmp.setSkuSn(vo.getSkuSn());
             goodsSkuSnInfoTmp.setGoodsSn(vo.getGoodsSn());
             goodsSkuSnInfoTmp.setBarcodeSn(vo.getBarcodeSn());
             goodsSkuSnInfoTmp.setGoodsName(vo.getGoodsName());

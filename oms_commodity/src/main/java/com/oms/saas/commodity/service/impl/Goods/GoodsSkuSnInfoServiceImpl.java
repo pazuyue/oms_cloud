@@ -38,7 +38,7 @@ public class GoodsSkuSnInfoServiceImpl extends ServiceImpl<GoodsSkuSnInfoMapper,
         QueryWrapper<GoodsSkuSnInfoTmp> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("notes","正常");
         GoodsSkuSnInfoTmp infoTmp = goodsSkuSnInfoTmpService.getOne(queryWrapper);
-        if (!ObjectUtil.isEmpty(infoTmp)){
+        if (ObjectUtil.isEmpty(infoTmp)){
             throw new RuntimeException("审核失败，请先处理异常导入信息");
         }
         List<GoodsSkuSnInfoTmp> list = goodsSkuSnInfoTmpService.list(queryWrapper);

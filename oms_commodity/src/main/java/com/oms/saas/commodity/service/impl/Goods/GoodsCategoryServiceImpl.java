@@ -16,8 +16,9 @@ public class GoodsCategoryServiceImpl implements GoodsCategoryService {
     @Override
     public int save(GoodsCategory goodsCategory) {
         System.out.println("save"+goodsCategory);
-        int pid = goodsCategory.getPid();
-        if (!ObjectUtil.isEmpty(pid)){
+        Object p = goodsCategory.getPid();
+        if (!ObjectUtil.isEmpty(p)){
+            int pid = (int) p;
             GoodsCategory goodsCategory1 = goodsCategoryMapper.selectById(pid);
             System.out.println("goodsCategory1"+goodsCategory1);
             if (ObjectUtil.isEmpty(goodsCategory1)){

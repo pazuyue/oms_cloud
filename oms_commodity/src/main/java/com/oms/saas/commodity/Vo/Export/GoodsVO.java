@@ -3,6 +3,8 @@ package com.oms.saas.commodity.Vo.Export;
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.oms.saas.commodity.validated.CategoryNotExist;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -25,7 +27,6 @@ public class GoodsVO {
     private String goodsName;
     @Excel(name = "分类(第三级分类名称，必填)", width = 20)
     @NotBlank(message = "分类不能为空")
-    @CategoryNotExist
     private String categoryName;
     @Excel(name = "颜色(≤30字符，不限格式，必填)", width = 20)
     @NotBlank(message = "颜色不能为空")
@@ -34,7 +35,7 @@ public class GoodsVO {
     @NotBlank(message = "尺码不能为空")
     private String sizeName;
     @Excel(name = "市场价(吊牌价，≥0，必填)", width = 20)
-    @NotBlank(message = "市场价不能为空")
+    @Positive(message = "市场价不能为空")
     private BigDecimal marketPrice;
     @Excel(name = "有效期(填写整数，需≥0，单位：天)", width = 20)
     private Integer validity;

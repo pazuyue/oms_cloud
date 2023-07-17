@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,6 +18,7 @@ import java.util.Date;
  * @since 2023-06-25
  */
 @TableName("goods_category")
+@Data
 public class GoodsCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,81 +60,4 @@ public class GoodsCategory implements Serializable {
      */
     private Byte level;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getBrandCode() {
-        return brandCode;
-    }
-
-    public void setBrandCode(String brandCode) {
-        this.brandCode = brandCode;
-    }
-
-    public String getCompanyCode() {
-        return companyCode;
-    }
-
-    public void setCompanyCode(String companyCode) {
-        this.companyCode = companyCode;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getPid() {
-        return pid;
-    }
-
-    public void setPid(Integer pid) {
-        this.pid = pid;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getModifyTime() {
-        return modifyTime;
-    }
-
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
-
-    public Byte getLevel() {
-        return level;
-    }
-
-    public void setLevel(Byte level) {
-        this.level = level;
-    }
-
-    @Override
-    public String toString() {
-        return "GoodsCategory{" +
-        ", id = " + id +
-        ", brandCode = " + brandCode +
-        ", companyCode = " + companyCode +
-        ", name = " + name +
-        ", pid = " + pid +
-        ", createTime = " + createTime +
-        ", modifyTime = " + modifyTime +
-        ", level = " + level +
-        "}";
-    }
 }

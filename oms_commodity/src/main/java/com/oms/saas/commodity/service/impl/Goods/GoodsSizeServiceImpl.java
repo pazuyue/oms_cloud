@@ -7,7 +7,9 @@ import com.oms.saas.commodity.Entity.Goods.GoodsSize;
 import com.oms.saas.commodity.mapper.Goods.GoodsSizeMapper;
 import com.oms.saas.commodity.service.Goods.GoodsSizeService;
 import jakarta.annotation.Resource;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GoodsSizeServiceImpl implements GoodsSizeService {
 
     @Resource

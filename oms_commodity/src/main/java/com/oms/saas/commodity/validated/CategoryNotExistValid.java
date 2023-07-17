@@ -31,6 +31,7 @@ public class CategoryNotExistValid implements ConstraintValidator<CategoryNotExi
     public boolean isExist(String s)
     {
        try {
+           System.out.println(goodsCategoryMapper.toString());
            QueryWrapper<GoodsCategory> queryWrapper = new QueryWrapper<>();
            queryWrapper.eq("name",s);
            GoodsCategory category = goodsCategoryMapper.selectOne(queryWrapper);
@@ -40,7 +41,7 @@ public class CategoryNotExistValid implements ConstraintValidator<CategoryNotExi
                return true;
            }
        }catch (Throwable throwable){
-           System.out.println(throwable);
+           System.out.println(throwable.getMessage());
        }
        return false;
     }
