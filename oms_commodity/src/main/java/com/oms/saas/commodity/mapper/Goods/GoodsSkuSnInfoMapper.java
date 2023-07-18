@@ -1,6 +1,6 @@
 package com.oms.saas.commodity.mapper.Goods;
 
-import com.oms.saas.commodity.entity.Goods.GoodsSkuSnInfo;
+import com.oms.saas.commodity.Entity.Goods.GoodsSkuSnInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

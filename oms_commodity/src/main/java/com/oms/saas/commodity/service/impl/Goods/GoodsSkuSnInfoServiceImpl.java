@@ -3,7 +3,7 @@ package com.oms.saas.commodity.service.impl.Goods;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.oms.saas.commodity.Entity.Goods.GoodsSkuSnInfoTmp;
-import com.oms.saas.commodity.entity.Goods.GoodsSkuSnInfo;
+import com.oms.saas.commodity.Entity.Goods.GoodsSkuSnInfo;
 import com.oms.saas.commodity.mapper.Goods.GoodsSkuSnInfoMapper;
 import com.oms.saas.commodity.service.Goods.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

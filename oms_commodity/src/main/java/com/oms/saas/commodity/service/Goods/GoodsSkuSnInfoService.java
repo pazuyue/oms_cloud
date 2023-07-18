@@ -1,7 +1,9 @@
 package com.oms.saas.commodity.service.Goods;
 
-import com.oms.saas.commodity.entity.Goods.GoodsSkuSnInfo;
+import com.oms.saas.commodity.Entity.Goods.GoodsSkuSnInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.oms.saas.commodity.Entity.Warehouse.OwnerInfo;
+import com.oms.saas.commodity.Vo.Warehouse.OwnerInfoVO;
 
 /**
  * <p>
