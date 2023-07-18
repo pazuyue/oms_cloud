@@ -43,6 +43,7 @@ public class OwnerInfoServiceImpl extends ServiceImpl<OwnerInfoMapper, OwnerInfo
         if (!StrUtil.isBlank(owner_code)){
             queryWrapper.eq("owner_code",owner_code);
         }
+        queryWrapper.orderByDesc("modify_time");
         return this.page(new Page<>(page, pageSize),queryWrapper);
 
     }
