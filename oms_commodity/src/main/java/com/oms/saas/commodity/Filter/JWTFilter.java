@@ -65,9 +65,11 @@ public class JWTFilter implements Filter {
             JSONObject jsonObject = JSON.parseObject(result.getBody());
             JSONObject data = jsonObject.getJSONObject("data");
             String companyCode = data.getString("company_code");
+            Integer userId = data.getInteger("user_id");
             if (StrUtil.isBlank(companyCode))
                 req.getRequestDispatcher("/expiredJwtException").forward(req, resp);
             jwtInfo.setCompanyCode(companyCode);
+            jwtInfo.setUserId(userId);
             System.out.println("===> chain.doFilter 后执行处理 jwtInfo 的相关方法"+jwtInfo.toString());
         }catch (Exception exception){
             System.out.println("===> chain.doFilter 后执行处理 exception 的相关方法"+exception.getMessage());

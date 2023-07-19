@@ -10,7 +10,7 @@ import org.springframework.web.context.WebApplicationContext;
 @Data
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class JwtInfo {
-    private String userName;
+    private Integer userId;
     private String nickName;
     private String email;
     private String phone;
