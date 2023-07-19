@@ -19,9 +19,7 @@ import java.util.Date;
  */
 @TableName("sys_user")
 @Data
-public class SysUser implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class SysUser {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
@@ -72,7 +70,7 @@ public class SysUser implements Serializable {
      * 公司编码
      */
     @NotBlank(message = "公司编码不能为空")
-    private String company_code;
+    private String companyCode;
 
     /**
      * 1 普通会员 2管理员

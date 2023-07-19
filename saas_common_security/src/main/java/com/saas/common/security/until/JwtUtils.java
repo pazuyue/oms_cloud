@@ -42,9 +42,7 @@ public class JwtUtils {
      * @param user_id
      * @return
      */
-    public String createJwt(String user_id) {
-        Map map =new HashMap();
-        map.put("user_id",user_id);
+    public String createJwt(Map map) {
         return Jwts.builder()
                 .setClaims(map)//设置携带参数
                 .setIssuedAt(new Date(System.currentTimeMillis()))//创建时间

@@ -23,6 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(SysUser::getUserName,username);
         SysUser sysUser = sysUserMapper.selectOne(queryWrapper);
+        System.out.println("loadUserByUsername:"+sysUser.toString());
         if (ObjectUtils.isEmpty(sysUser)){
             throw new RuntimeException("用户名或者密码错误");
         }

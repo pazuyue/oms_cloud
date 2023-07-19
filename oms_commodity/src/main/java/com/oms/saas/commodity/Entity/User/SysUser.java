@@ -5,6 +5,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.io.Serializable;
 import java.util.Date;

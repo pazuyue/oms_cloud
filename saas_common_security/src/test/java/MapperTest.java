@@ -43,7 +43,9 @@ public class MapperTest {
 
     @Test
     public void creatJWTTest() {
-        String jwt = jwtUtils.createJwt("1");
+        Map userMap =new HashMap();
+        userMap.put("user_id",1);
+        String jwt = jwtUtils.createJwt(userMap);
         System.out.println(jwt);
         Map<String, Object> map = jwtUtils.getPayLoadALSOExcludeExpAndIat(jwt);
         System.out.println(map.get("user_id"));
