@@ -41,11 +41,11 @@ public class JWTFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         System.out.println("===> chain.doFilter 后执行处理 response 的相关方法");
         // 在response header里设置一个token
-        setToken(servletRequest,servletResponse);
+        checkToken(servletRequest,servletResponse);
         filterChain.doFilter(servletRequest, servletResponse);// 处理请求和响应的分界线
     }
 
-    private void setToken(ServletRequest servletRequest,ServletResponse servletResponse) throws ServletException, IOException {
+    private void checkToken(ServletRequest servletRequest,ServletResponse servletResponse) throws ServletException, IOException {
         HttpServletRequest req = (HttpServletRequest)servletRequest;
         HttpServletResponse resp = (HttpServletResponse)servletResponse;
         String token = req.getHeader("token");
@@ -53,11 +53,9 @@ public class JWTFilter implements Filter {
         if (StrUtil.isBlank(token)){
             // 异常捕获，发送到expiredJwtException
             req.setAttribute("expiredJwtException", "token is empty");
-
             req.getRequestDispatcher("/expiredJwtException").forward(req, resp);
         }
 
-        System.out.println("===> chain.doFilter 后执行处理 setToken 的相关方法");
         HttpHeaders headers = new HttpHeaders();
         headers.add("token",token);
         HttpEntity<Result> httpEntity = new HttpEntity<>( headers);
