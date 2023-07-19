@@ -7,9 +7,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.oms.saas.commodity.Entity.Warehouse.OwnerInfo;
 import com.oms.saas.commodity.Entity.Warehouse.WmsRealStoreInfo;
 import com.oms.saas.commodity.Vo.Warehouse.WmsRealStoreInfoVO;
+import com.oms.saas.commodity.dto.JwtInfo;
 import com.oms.saas.commodity.mapper.Warehouse.WmsRealStoreInfoMapper;
 import com.oms.saas.commodity.service.Warehouse.WmsRealStoreInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,6 +25,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class WmsRealStoreInfoServiceImpl extends ServiceImpl<WmsRealStoreInfoMapper, WmsRealStoreInfo> implements WmsRealStoreInfoService {
 
+    @Resource
+    private JwtInfo jwtInfo;
+
     @Override
     public boolean save(WmsRealStoreInfoVO vo) {
         WmsRealStoreInfo infoVO = findOneByOwnerInfoVO(vo);
@@ -30,6 +35,7 @@ public class WmsRealStoreInfoServiceImpl extends ServiceImpl<WmsRealStoreInfoMap
             throw new RuntimeException("实仓编码"+infoVO.getRealStoreCode()+"已存在");
         WmsRealStoreInfo wmsRealStoreInfo = new WmsRealStoreInfo();
         BeanUtil.copyProperties(vo,wmsRealStoreInfo);
+        wmsRealStoreInfo.setCompanyCode(jwtInfo.getCompanyCode());
         if (this.save(wmsRealStoreInfo))
             return true;
         return false;

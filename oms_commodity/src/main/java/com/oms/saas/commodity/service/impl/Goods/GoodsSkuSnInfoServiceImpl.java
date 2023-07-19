@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.oms.saas.commodity.Entity.Goods.GoodsSkuSnInfoTmp;
 import com.oms.saas.commodity.Entity.Goods.GoodsSkuSnInfo;
+import com.oms.saas.commodity.dto.JwtInfo;
 import com.oms.saas.commodity.mapper.Goods.GoodsSkuSnInfoMapper;
 import com.oms.saas.commodity.service.Goods.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -24,7 +25,8 @@ import java.util.List;
 @Service
 public class GoodsSkuSnInfoServiceImpl extends ServiceImpl<GoodsSkuSnInfoMapper, GoodsSkuSnInfo> implements GoodsSkuSnInfoService {
 
-
+    @Resource
+    private JwtInfo jwtInfo;
     @Resource
     GoodsColorService goodsColorService;
     @Resource
@@ -67,6 +69,7 @@ public class GoodsSkuSnInfoServiceImpl extends ServiceImpl<GoodsSkuSnInfoMapper,
             goods.setIsFd(tmp.getIsFd());
             goods.setIsGift(tmp.getIsGift());
             goods.setDescription(tmp.getNotes());
+            goods.setCompanyCode(jwtInfo.getCompanyCode());
             goodsSkuSnInfoArrayList.add(goods);
         }
 

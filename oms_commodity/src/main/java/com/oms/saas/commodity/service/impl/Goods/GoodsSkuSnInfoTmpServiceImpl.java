@@ -8,8 +8,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.oms.saas.commodity.Entity.Goods.GoodsSkuSnInfoTmp;
 import com.oms.saas.commodity.Vo.Export.GoodsVO;
+import com.oms.saas.commodity.dto.JwtInfo;
 import com.oms.saas.commodity.mapper.Goods.GoodsSkuSnInfoTmpMapper;
 import com.oms.saas.commodity.service.Goods.GoodsSkuSnInfoTmpService;
+import jakarta.annotation.Resource;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -22,6 +24,8 @@ import java.util.Set;
 @Service
 public class GoodsSkuSnInfoTmpServiceImpl extends ServiceImpl<GoodsSkuSnInfoTmpMapper,GoodsSkuSnInfoTmp> implements GoodsSkuSnInfoTmpService {
 
+    @Resource
+    private JwtInfo jwtInfo;
     @Override
     public boolean export(List<GoodsVO> list) {
         return this.saveGoodsSkuSnInfoTmp(list);
@@ -63,6 +67,7 @@ public class GoodsSkuSnInfoTmpServiceImpl extends ServiceImpl<GoodsSkuSnInfoTmpM
             goodsSkuSnInfoTmp.setMarketPrice(vo.getMarketPrice());
             goodsSkuSnInfoTmp.setGoodsDesc(vo.getDescription());
             goodsSkuSnInfoTmp.setNotes(s);
+            goodsSkuSnInfoTmp.setCompanyCode(jwtInfo.getCompanyCode());
             goodsSkuSnInfoTmpList.add(goodsSkuSnInfoTmp);
         });
         Console.log(goodsSkuSnInfoTmpList);

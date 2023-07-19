@@ -3,6 +3,7 @@ package com.oms.saas.commodity.service.impl.Goods;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.oms.saas.commodity.Entity.Goods.GoodsColor;
+import com.oms.saas.commodity.dto.JwtInfo;
 import com.oms.saas.commodity.mapper.Goods.GoodsColorMapper;
 import com.oms.saas.commodity.service.Goods.GoodsColorService;
 import jakarta.annotation.Resource;
@@ -13,6 +14,8 @@ public class GoodsColorServiceImpl implements GoodsColorService {
 
     @Resource
     private GoodsColorMapper goodsColorMapper;
+    @Resource
+    private JwtInfo jwtInfo;
     @Override
     public Integer selectOrSaveByColorName(String color_name) {
         QueryWrapper<GoodsColor> queryWrapper = new QueryWrapper<>();
@@ -21,6 +24,7 @@ public class GoodsColorServiceImpl implements GoodsColorService {
         if (ObjectUtil.isEmpty(goodsColor)){
             GoodsColor color = new GoodsColor();
             color.setColorName("color_name");
+            color.setCompanyCode(jwtInfo.getCompanyCode());
             return goodsColorMapper.insert(color);
         }
 
