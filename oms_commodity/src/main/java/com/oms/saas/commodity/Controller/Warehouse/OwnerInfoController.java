@@ -7,6 +7,7 @@ import com.oms.saas.commodity.Entity.Warehouse.OwnerInfo;
 import com.oms.saas.commodity.Vo.Archives.GoodsCategoryVO;
 import com.oms.saas.commodity.Vo.Warehouse.OwnerInfoVO;
 import com.oms.saas.commodity.api.Result;
+import com.oms.saas.commodity.dto.JwtInfo;
 import com.oms.saas.commodity.mapper.Warehouse.OwnerInfoMapper;
 import com.oms.saas.commodity.service.Warehouse.OwnerInfoService;
 import jakarta.annotation.Resource;
