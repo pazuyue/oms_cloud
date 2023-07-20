@@ -57,7 +57,11 @@ public class MapperTest {
 
     @Test
     public void testLeftJoin(){
-        //UserDTO dtoList = sysUserMapper.getUserById(1);
-        //System.out.println(dtoList);
+       try {
+           SysUser user = sysUserMapper.selectByAAAAId(1);
+           System.out.println(user);
+       }catch (Throwable throwable){
+           System.out.println(throwable.getMessage());
+       }
     }
 }

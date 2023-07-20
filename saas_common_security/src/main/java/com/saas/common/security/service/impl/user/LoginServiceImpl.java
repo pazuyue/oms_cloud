@@ -6,7 +6,6 @@ import com.saas.common.security.service.user.LoginService;
 import com.saas.common.security.until.JwtUtils;
 import com.saas.common.security.until.RedisCache;
 import com.saas.common.security.vo.user.LoginUser;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
