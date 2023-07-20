@@ -1,6 +1,7 @@
 package com.oms.saas.commodity.service.impl.Warehouse;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -36,6 +37,8 @@ public class SupplierInfoServiceImpl extends ServiceImpl<SupplierInfoMapper, Sup
             throw new RuntimeException("供应商主表"+one.getSupplierSn()+"已存在");
         SupplierInfo supplierInfo = new SupplierInfo();
         BeanUtil.copyProperties(vo,supplierInfo);
+        String po_sn =  IdUtil.simpleUUID();
+        supplierInfo.setSupplierSn(po_sn);
         supplierInfo.setCompanyCode(jwtInfo.getCompanyCode());
         if (this.save(supplierInfo))
             return true;

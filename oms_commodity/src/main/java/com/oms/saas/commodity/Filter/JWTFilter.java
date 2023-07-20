@@ -34,11 +34,11 @@ public class JWTFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         System.out.println("===> chain.doFilter 后执行处理 response 的相关方法");
         // 在response header里设置一个token
-        checkToken(servletRequest,servletResponse);
-        filterChain.doFilter(servletRequest, servletResponse);// 处理请求和响应的分界线
+        if (checkToken(servletRequest,servletResponse))
+            filterChain.doFilter(servletRequest, servletResponse);// 处理请求和响应的分界线
     }
 
-    private void checkToken(ServletRequest servletRequest,ServletResponse servletResponse) throws ServletException, IOException {
+    private boolean checkToken(ServletRequest servletRequest,ServletResponse servletResponse) throws ServletException, IOException {
         HttpServletRequest req = (HttpServletRequest)servletRequest;
         HttpServletResponse resp = (HttpServletResponse)servletResponse;
         String token = req.getHeader("token");
@@ -65,12 +65,14 @@ public class JWTFilter implements Filter {
             jwtInfo.setUserId(userId);
             jwtInfo.setToken(token);
             System.out.println("===> chain.doFilter 后执行处理 jwtInfo 的相关方法"+jwtInfo.toString());
+            return true;
         }catch (Exception exception){
             System.out.println("===> chain.doFilter 后执行处理 exception 的相关方法"+exception.getMessage());
             // 异常捕获，发送到expiredJwtException
             req.setAttribute("expiredJwtException", exception.getMessage());
             //将异常分发到/expiredJwtException控制器
             req.getRequestDispatcher("/expiredJwtException").forward(req, resp);
+            return false;
         }
     }
 
