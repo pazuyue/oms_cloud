@@ -5,24 +5,17 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.oms.saas.commodity.api.Result;
 import com.oms.saas.commodity.dto.JwtInfo;
-import com.oms.saas.commodity.until.RedisCache;
 import jakarta.annotation.Resource;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.HandlerExceptionResolver;
-
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @WebFilter // 注册拦截器，并添加拦截路径‘/user/getOne’
 public class JWTFilter implements Filter {
@@ -70,6 +63,7 @@ public class JWTFilter implements Filter {
                 req.getRequestDispatcher("/expiredJwtException").forward(req, resp);
             jwtInfo.setCompanyCode(companyCode);
             jwtInfo.setUserId(userId);
+            jwtInfo.setToken(token);
             System.out.println("===> chain.doFilter 后执行处理 jwtInfo 的相关方法"+jwtInfo.toString());
         }catch (Exception exception){
             System.out.println("===> chain.doFilter 后执行处理 exception 的相关方法"+exception.getMessage());

@@ -27,7 +27,6 @@ public class OwnerInfoController {
 
     @SneakyThrows
     @PostMapping(value = "/save")
-    @ResponseBody
     public Result save(@Validated OwnerInfoVO ownerInfoVO){
         Console.log(ownerInfoVO.toString());
         if (ownerInfoService.save(ownerInfoVO))
@@ -37,7 +36,6 @@ public class OwnerInfoController {
 
     @SneakyThrows
     @PostMapping(value = "/list")
-    @ResponseBody
     public Result list(@RequestParam(required = false) String owner_code,@RequestParam(value = "page",defaultValue = "1") Integer page){
         Page<OwnerInfo> list = ownerInfoService.list(owner_code, page, pageSize);
         return Result.success(list);

@@ -15,4 +15,5 @@ public class JwtInfo {
     private String email;
     private String phone;
     private String companyCode;
+    private String token;
 }
