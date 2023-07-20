@@ -1,7 +1,10 @@
 package com.saas.common.security.service.Brand;
 
+import com.saas.common.security.api.Result;
 import com.saas.common.security.entity.Brand.BrandInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-07-20
  */
 public interface BrandInfoService extends IService<BrandInfo> {
-
+    List<BrandInfo> getBrandByUserId(Integer userId);
 }

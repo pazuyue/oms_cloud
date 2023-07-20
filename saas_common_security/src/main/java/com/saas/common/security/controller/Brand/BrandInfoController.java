@@ -1,7 +1,9 @@
 package com.saas.common.security.controller.Brand;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.saas.common.security.api.Result;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -10,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import com.saas.common.security.service.Brand.BrandInfoService;
 import com.saas.common.security.entity.Brand.BrandInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * <p>
@@ -26,16 +30,14 @@ public class BrandInfoController {
 
     @Autowired
     private BrandInfoService brandInfoService;
+    @Value("${pageable.page.size:10}")
+    private Integer pageSize;
 
     @GetMapping(value = "/")
-    public Result<Page<BrandInfo>> list(@RequestParam(required = false) Integer current, @RequestParam(required = false) Integer pageSize) {
-        if (current == null) {
-            current = 1;
-        }
-        if (pageSize == null) {
-            pageSize = 10;
-        }
-        Page<BrandInfo> aPage = brandInfoService.page(new Page<>(current, pageSize));
+    public Result<Page<BrandInfo>> list(@RequestParam(required = false) Integer page) {
+        if (page == null)
+            page = 1;
+        Page<BrandInfo> aPage = brandInfoService.page(new Page<>(page, pageSize));
         return Result.success(aPage);
     }
 
@@ -59,8 +61,15 @@ public class BrandInfoController {
     }
 
     @PostMapping(value = "/update")
-    public Result<Object> update(@RequestBody BrandInfo params) {
+    public Result<BrandInfo> update(@RequestBody BrandInfo params) {
         brandInfoService.updateById(params);
         return Result.success();
+    }
+
+    @PostMapping(value = "/getBrandByUserId")
+    public Result<List<BrandInfo>> getBrandByUserId(@RequestParam(value = "userId") Integer userId){
+        System.out.println("user_id:"+userId);
+        List<BrandInfo> brandList = brandInfoService.getBrandByUserId(userId);
+        return Result.success(brandList);
     }
 }
