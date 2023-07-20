@@ -112,11 +112,11 @@
         </dependency>
 
         <!-- 分页 插件-->
-        <dependency>
+       <!-- <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.12</version>
-        </dependency>
+        </dependency>-->
 
         <!-- mybatis-plus-generator-ui -->
      <!--   <dependency>

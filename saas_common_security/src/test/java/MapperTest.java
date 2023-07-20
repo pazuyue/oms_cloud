@@ -58,8 +58,8 @@ public class MapperTest {
     @Test
     public void testLeftJoin(){
        try {
-           SysUser user = sysUserMapper.selectByAAAAId(1);
-           System.out.println(user);
+           UserDTO user = sysUserMapper.selectUserInfoWtihBrand(1);
+           System.out.println("user"+user.toString());
        }catch (Throwable throwable){
            System.out.println(throwable.getMessage());
        }
