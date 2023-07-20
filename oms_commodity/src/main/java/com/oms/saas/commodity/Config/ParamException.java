@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.SQLNonTransientException;
+
 @RestControllerAdvice
 public class ParamException {
 
@@ -53,8 +57,15 @@ public class ParamException {
 
     @ExceptionHandler({Exception.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Result handleRuntimeException(Exception ex) {
+    public Result handleException(Exception ex) {
         System.out.println("Exception:"+ex.getMessage());
+        return Result.failed(ResultCode.FAILED,ex.getMessage());
+    }
+
+    @ExceptionHandler({SQLException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Result handleSQLException(SQLException ex) {
+        System.out.println("SQLNonTransientException:"+ex.getMessage());
         return Result.failed(ResultCode.FAILED,ex.getMessage());
     }
 }

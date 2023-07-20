@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLException;
+
 @RestControllerAdvice
 public class ParamException {
 
@@ -33,10 +35,12 @@ public class ParamException {
         return Result.failed(ResultCode.PARAM_ERROR,ex.getMessage());
     }
 
-   /* @ExceptionHandler(value =Exception.class)
-    @ResponseBody
-    public Result exceptionHandler(Exception e){
-        System.out.println("全局异常捕获>>>:"+e);
-        return Result.failed(e.getMessage());
-    }*/
+    @ExceptionHandler({SQLException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Result handleSQLException(SQLException ex) {
+        System.out.println("SQLException:"+ex.getMessage());
+        return Result.failed(ResultCode.FAILED,ex.getMessage());
+    }
+
+
 }

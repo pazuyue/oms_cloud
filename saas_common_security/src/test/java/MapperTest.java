@@ -1,7 +1,10 @@
+
 import com.saas.common.security.CommonSecurityApplication;
+import com.saas.common.security.dto.UserDTO;
 import com.saas.common.security.entity.User.SysUser;
 import com.saas.common.security.mapper.User.SysUserMapper;
 import com.saas.common.security.until.JwtUtils;
+import jakarta.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +14,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {CommonSecurityApplication.class})
 public class MapperTest {
 
-    @Autowired
+    @Resource
     private SysUserMapper sysUserMapper;
-    @Autowired
+    @Resource
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Autowired
+    @Resource
     private JwtUtils jwtUtils;
 
     @Test
@@ -29,7 +33,7 @@ public class MapperTest {
         SysUser user = new SysUser();
         user.setUserName("yueguang");
         user.setNickName("朝雾轻晓");
-        user.setPassword("123456");
+        user.setPassword("22222");
         sysUserMapper.insert(user);
 
     }
@@ -49,5 +53,11 @@ public class MapperTest {
         System.out.println(jwt);
         Map<String, Object> map = jwtUtils.getPayLoadALSOExcludeExpAndIat(jwt);
         System.out.println(map.get("user_id"));
+    }
+
+    @Test
+    public void testLeftJoin(){
+        //UserDTO dtoList = sysUserMapper.getUserById(1);
+        //System.out.println(dtoList);
     }
 }
