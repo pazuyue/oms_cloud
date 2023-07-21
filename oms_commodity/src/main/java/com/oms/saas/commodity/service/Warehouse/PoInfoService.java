@@ -16,4 +16,6 @@ public interface PoInfoService extends IService<PoInfo> {
 
     public boolean save(PoInfoVO poInfoVO);
 
+    public boolean cancel(Integer id);
+
 }

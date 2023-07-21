@@ -2,6 +2,8 @@ package com.oms.saas.commodity.service.impl.Warehouse;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.IdUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
 import com.oms.saas.commodity.Entity.Warehouse.PoInfo;
 import com.oms.saas.commodity.Entity.Warehouse.PoInfoBrandMapper;
 import com.oms.saas.commodity.Vo.Warehouse.PoInfoVO;
@@ -50,5 +52,13 @@ public class PoInfoServiceImpl extends ServiceImpl<PoInfoMapper, PoInfo> impleme
             poInfoMapperArrayList.add(poInfoMapper);
         }
         return poInfoBrandMapperService.saveBatch(poInfoMapperArrayList);
+    }
+
+    @Override
+    public boolean cancel(Integer id) {
+        PoInfo poInfo = new PoInfo();
+        poInfo.setPoState((byte) -1);
+        poInfo.setId(id);
+        return this.updateById(poInfo);
     }
 }
