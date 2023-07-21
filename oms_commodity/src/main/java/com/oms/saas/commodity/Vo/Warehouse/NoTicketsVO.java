@@ -7,6 +7,12 @@ import java.util.Date;
 
 @Data
 public class NoTicketsVO {
+
+    /**
+     * 关联采购单号
+     */
+    @NotBlank(message = "关联采购单号不能为空")
+    private String poSn;
     /**
      * 入库单名称
      */

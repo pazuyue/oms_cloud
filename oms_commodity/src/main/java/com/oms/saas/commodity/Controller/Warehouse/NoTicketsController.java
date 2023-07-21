@@ -18,6 +18,7 @@ public class NoTicketsController {
 
     @PostMapping("/save")
     public Result save(@Validated NoTicketsVO vo){
+        ticketsService.save(vo);
         return Result.failed("添加失败");
     }
 }

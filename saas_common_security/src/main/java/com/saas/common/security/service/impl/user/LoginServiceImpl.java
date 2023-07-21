@@ -36,9 +36,11 @@ public class LoginServiceImpl implements LoginService {
         SysUser sysUser =loginUser.getSysUser();
         int user_id = sysUser.getId();
         String company_code = sysUser.getCompanyCode();
+        String nickName = sysUser.getNickName();
         Map map =new HashMap();
         map.put("user_id",user_id);
         map.put("company_code",company_code);
+        map.put("nick_name",nickName);
         System.out.println("createJwtMap"+map);
         String jwt = jwtUtils.createJwt(map);
         redisCache.setCacheObject("login:"+user_id,loginUser.getSysUser(),3600, TimeUnit.SECONDS);

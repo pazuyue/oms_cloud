@@ -2,6 +2,7 @@ package com.oms.saas.commodity.service.Warehouse;
 
 import com.oms.saas.commodity.Entity.Warehouse.NoTickets;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.oms.saas.commodity.Vo.Warehouse.NoTicketsVO;
 
 /**
  * <p>
@@ -12,5 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-07-21
  */
 public interface NoTicketsService extends IService<NoTickets> {
-     boolean save();
+     boolean save(NoTicketsVO vo);
 }
