@@ -16,9 +16,9 @@ import java.util.Date;
  * @author 月光光
  * @since 2023-07-20
  */
-@TableName("po_info_brand_mapper")
+@TableName("sn_and_brand_association")
 @Data
-public class PoInfoBrandMapper implements Serializable {
+public class SnAndBrandAssociation implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @TableId(value = "id", type = IdType.AUTO)
@@ -27,7 +27,9 @@ public class PoInfoBrandMapper implements Serializable {
     /**
      * po_info表的po_sn
      */
-    private String poSn;
+    private String sn;
+
+    private Integer type;
 
     /**
      * 品牌编码
@@ -43,4 +45,6 @@ public class PoInfoBrandMapper implements Serializable {
      * 修改时间
      */
     private Date modifyTime;
+
+    private String companyCode;
 }

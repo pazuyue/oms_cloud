@@ -1,7 +1,8 @@
 package com.oms.saas.commodity.service.Warehouse;
 
-import com.oms.saas.commodity.Entity.Warehouse.PoInfoBrandMapper;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.oms.saas.commodity.Entity.Warehouse.SnAndBrandAssociation;
+import com.oms.saas.commodity.mapper.Warehouse.SnAndBrandAssociationMapper;
 
 /**
  * <p>
@@ -11,6 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author 月光光
  * @since 2023-07-20
  */
-public interface PoInfoBrandMapperService extends IService<PoInfoBrandMapper> {
+public interface SnAndBrandAssociationMapperService extends IService<SnAndBrandAssociation> {
 
 }

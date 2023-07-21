@@ -1,7 +1,7 @@
 package com.oms.saas.commodity.mapper.Warehouse;
 
-import com.oms.saas.commodity.Entity.Warehouse.PoInfoBrandMapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.oms.saas.commodity.Entity.Warehouse.SnAndBrandAssociation;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author 月光光
  * @since 2023-07-20
  */
-public interface PoInfoBrandMapperMapper extends BaseMapper<PoInfoBrandMapper> {
+public interface SnAndBrandAssociationMapper extends BaseMapper<SnAndBrandAssociation> {
 
 }

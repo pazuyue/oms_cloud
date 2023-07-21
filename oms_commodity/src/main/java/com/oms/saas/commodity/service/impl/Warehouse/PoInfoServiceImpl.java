@@ -2,22 +2,19 @@ package com.oms.saas.commodity.service.impl.Warehouse;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.IdUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
 import com.oms.saas.commodity.Entity.Warehouse.PoInfo;
-import com.oms.saas.commodity.Entity.Warehouse.PoInfoBrandMapper;
+import com.oms.saas.commodity.Entity.Warehouse.SnAndBrandAssociation;
 import com.oms.saas.commodity.Vo.Warehouse.PoInfoVO;
+import com.oms.saas.commodity.api.DocumentType;
 import com.oms.saas.commodity.dto.JwtInfo;
 import com.oms.saas.commodity.mapper.Warehouse.PoInfoMapper;
-import com.oms.saas.commodity.service.Warehouse.PoInfoBrandMapperService;
 import com.oms.saas.commodity.service.Warehouse.PoInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.oms.saas.commodity.service.Warehouse.SnAndBrandAssociationMapperService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -33,7 +30,7 @@ public class PoInfoServiceImpl extends ServiceImpl<PoInfoMapper, PoInfo> impleme
     @Resource
     private JwtInfo jwtInfo;
     @Resource
-    private PoInfoBrandMapperService poInfoBrandMapperService;
+    private SnAndBrandAssociationMapperService poInfoBrandMapperService;
     @Override
     public boolean save(PoInfoVO vo) {
         String posn = "PO_"+IdUtil.simpleUUID();
@@ -43,13 +40,15 @@ public class PoInfoServiceImpl extends ServiceImpl<PoInfoMapper, PoInfo> impleme
         poInfo.setCompanyCode(jwtInfo.getCompanyCode());
         this.save(poInfo);
         List<String> brandCodes = vo.getBrandCodes();
-        List<PoInfoBrandMapper> poInfoMapperArrayList =new ArrayList<>();
+        List<SnAndBrandAssociation> poInfoMapperArrayList =new ArrayList<>();
 
         for (String brandCode : brandCodes) {
-            PoInfoBrandMapper poInfoMapper = new PoInfoBrandMapper();
-            poInfoMapper.setBrandCode(brandCode);
-            poInfoMapper.setPoSn(posn);
-            poInfoMapperArrayList.add(poInfoMapper);
+            SnAndBrandAssociation snAndBrandAssociation = new SnAndBrandAssociation();
+            snAndBrandAssociation.setBrandCode(brandCode);
+            snAndBrandAssociation.setSn(posn);
+            snAndBrandAssociation.setType(DocumentType.PO.getCode());
+            snAndBrandAssociation.setCompanyCode(jwtInfo.getCompanyCode());
+            poInfoMapperArrayList.add(snAndBrandAssociation);
         }
         return poInfoBrandMapperService.saveBatch(poInfoMapperArrayList);
     }
