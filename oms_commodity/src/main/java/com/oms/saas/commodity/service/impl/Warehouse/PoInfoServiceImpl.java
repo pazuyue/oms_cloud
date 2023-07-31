@@ -33,7 +33,7 @@ public class PoInfoServiceImpl extends ServiceImpl<PoInfoMapper, PoInfo> impleme
     private SnAndBrandAssociationMapperService poInfoBrandMapperService;
     @Override
     public boolean save(PoInfoVO vo) {
-        String posn = "PO_"+IdUtil.simpleUUID();
+        String posn = "PO"+IdUtil.simpleUUID();
         PoInfo poInfo = new PoInfo();
         BeanUtil.copyProperties(vo,poInfo);
         poInfo.setPoSn(posn);

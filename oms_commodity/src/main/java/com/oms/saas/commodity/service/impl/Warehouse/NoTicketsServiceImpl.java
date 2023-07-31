@@ -34,6 +34,6 @@ public class NoTicketsServiceImpl extends ServiceImpl<NoTicketsMapper, NoTickets
         noTickets.setBatchCode(batchCode);
         noTickets.setCompanyCode(jwtInfo.getCompanyCode());
         noTickets.setCreatedUser(jwtInfo.getNickName());
-        return false;
+        return  this.save(noTickets);
     }
 }
