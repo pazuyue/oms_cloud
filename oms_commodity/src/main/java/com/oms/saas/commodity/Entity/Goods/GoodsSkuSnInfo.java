@@ -46,16 +46,6 @@ public class GoodsSkuSnInfo implements Serializable {
     private String goodsName;
 
     /**
-     * 品牌编码
-     */
-    private String brandCode;
-
-    /**
-     * 品牌名
-     */
-    private String brandName;
-
-    /**
      * 类目code
      */
     private Integer categoryCode;

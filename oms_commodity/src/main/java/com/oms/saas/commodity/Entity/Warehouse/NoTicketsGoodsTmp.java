@@ -96,24 +96,9 @@ public class NoTicketsGoodsTmp implements Serializable {
     private String companyCode;
 
     /**
-     * 品牌编码
-     */
-    private String brandCode;
-
-    /**
-     * 品牌名称
-     */
-    private String brandName;
-
-    /**
      * 错误信息
      */
     private String errorInfo;
-
-    /**
-     * 导入文件的文件名
-     */
-    private String fileName;
 
     /**
      * 修改时间
