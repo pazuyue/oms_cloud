@@ -1,13 +1,20 @@
 package com.oms.saas.commodity.Controller.Warehouse;
 
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
+import cn.hutool.core.lang.Console;
+import com.oms.saas.commodity.Vo.Export.GoodsVO;
+import com.oms.saas.commodity.Vo.Export.NoTicketsGoodsTmpVO;
 import com.oms.saas.commodity.Vo.Warehouse.NoTicketsVO;
 import com.oms.saas.commodity.api.Result;
 import com.oms.saas.commodity.service.Warehouse.NoTicketsService;
 import jakarta.annotation.Resource;
+import lombok.SneakyThrows;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/noTickets")
@@ -21,5 +28,22 @@ public class NoTicketsController {
        if (ticketsService.save(vo))
            return Result.success();
         return Result.failed("添加失败");
+    }
+
+    /**
+     * 商品导入
+     * @param file
+     * @return
+     */
+    @SneakyThrows
+    @PostMapping(value = "/export")
+    @ResponseBody
+    public Result export(@RequestParam(value = "file", required = true) MultipartFile file, @RequestParam(value = "no_sn",required = false) String no_sn) {
+        ImportParams params = new ImportParams();
+        List<NoTicketsGoodsTmpVO> noTicketsGoodsTmpVOList = ExcelImportUtil.importExcel(
+                file.getInputStream(),
+                NoTicketsGoodsTmpVO.class, params);
+        Console.log(noTicketsGoodsTmpVOList);
+        return Result.failed("导入失败");
     }
 }
