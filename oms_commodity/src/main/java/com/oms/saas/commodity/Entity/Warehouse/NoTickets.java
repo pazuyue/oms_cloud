@@ -73,7 +73,7 @@ public class NoTickets implements Serializable {
     /**
      * -1 已作废 1 新建，2 待审核 3 待入库 4 已入库
      */
-    private Byte noState;
+    private Integer noState;
 
     /**
      * 备注

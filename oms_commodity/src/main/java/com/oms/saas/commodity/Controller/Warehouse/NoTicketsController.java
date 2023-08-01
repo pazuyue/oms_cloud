@@ -50,4 +50,20 @@ public class NoTicketsController {
             return Result.success();
         return Result.failed("导入失败");
     }
+
+    /**
+     * 提交审核
+     * @param noSn
+     * @return
+     */
+    @SneakyThrows
+    @PostMapping(value = "/submitExamine")
+    @ResponseBody
+    public Result submitExamine(@RequestParam(value = "no_sn") String noSn){
+        if (noTicketsGoodsTmpService.submitExamine(noSn))
+            return Result.success();
+        return Result.failed("审核失败");
+
+
+    }
 }

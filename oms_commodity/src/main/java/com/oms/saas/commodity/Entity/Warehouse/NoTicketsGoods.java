@@ -11,15 +11,15 @@ import java.util.Date;
 
 /**
  * <p>
- * 入库通知单明细-未送审
+ * 入库通知单明细
  * </p>
  *
  * @author 月光光
  * @since 2023-08-01
  */
-@TableName("no_tickets_goods_tmp")
+@TableName("no_tickets_goods")
 @Data
-public class NoTicketsGoodsTmp implements Serializable {
+public class NoTicketsGoods implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @TableId(value = "id", type = IdType.AUTO)
@@ -36,14 +36,14 @@ public class NoTicketsGoodsTmp implements Serializable {
     private String skuSn;
 
     /**
-     * 批次
-     */
-    private String batchCode;
-
-    /**
      * 条形码
      */
     private String barcodeSn;
+
+    /**
+     * 批次
+     */
+    private String batchCode;
 
     /**
      * 货号
@@ -66,14 +66,39 @@ public class NoTicketsGoodsTmp implements Serializable {
     private Integer zpNumberExpected;
 
     /**
+     * 计划入库-次品
+     */
+    private Integer cpNumberExpected;
+
+    /**
+     * 实际入库-正品
+     */
+    private Integer zpNumberActually;
+
+    /**
+     * 实际入库-次品
+     */
+    private Integer cpNumberActually;
+
+    /**
+     * 入库差异-正品
+     */
+    private Integer zpDifNumberActually;
+
+    /**
+     * 实际入库-次品
+     */
+    private Integer cpDifNumberActually;
+
+    /**
      * 公司编码
      */
     private String companyCode;
 
     /**
-     * 错误信息
+     * 添加时间
      */
-    private String errorInfo;
+    private Date createTime;
 
     /**
      * 修改时间

@@ -16,6 +16,19 @@ import java.util.List;
  */
 public interface NoTicketsGoodsTmpService extends IService<NoTicketsGoodsTmp> {
 
-    public boolean save(List<NoTicketsGoodsTmpVO> list,String no_sn);
+    /**
+     * 导出保存
+     * @param list
+     * @param noSn
+     * @return
+     */
+    public boolean save(List<NoTicketsGoodsTmpVO> list,String noSn);
+
+    /**
+     * 提交审核
+     * @param noSn
+     * @return
+     */
+    public boolean submitExamine(String noSn);
 
 }
