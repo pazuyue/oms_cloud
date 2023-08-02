@@ -2,6 +2,7 @@ package com.oms.saas.commodity.service.Warehouse;
 
 import com.oms.saas.commodity.Entity.Warehouse.WmsSimulationStoreInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.oms.saas.commodity.Vo.Warehouse.WmsSimulationStoreInfoVO;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface WmsSimulationStoreInfoService extends IService<WmsSimulationStoreInfo> {
 
+    public boolean save(WmsSimulationStoreInfoVO vo);
 }
