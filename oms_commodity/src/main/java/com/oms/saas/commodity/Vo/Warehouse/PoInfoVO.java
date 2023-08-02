@@ -27,5 +27,8 @@ public class PoInfoVO {
      */
     private String remarks;
 
+    /**
+     * 品牌信息
+     */
     private List<String> brandCodes;
 }

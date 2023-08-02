@@ -30,7 +30,7 @@ public class PoInfoServiceImpl extends ServiceImpl<PoInfoMapper, PoInfo> impleme
     @Resource
     private JwtInfo jwtInfo;
     @Resource
-    private SnAndBrandAssociationMapperService poInfoBrandMapperService;
+    private SnAndBrandAssociationMapperService snAndBrandAssociationMapperService;
     @Override
     public boolean save(PoInfoVO vo) {
         String posn = "PO"+IdUtil.simpleUUID();
@@ -50,7 +50,7 @@ public class PoInfoServiceImpl extends ServiceImpl<PoInfoMapper, PoInfo> impleme
             snAndBrandAssociation.setCompanyCode(jwtInfo.getCompanyCode());
             poInfoMapperArrayList.add(snAndBrandAssociation);
         }
-        return poInfoBrandMapperService.saveBatch(poInfoMapperArrayList);
+        return snAndBrandAssociationMapperService.saveBatch(poInfoMapperArrayList);
     }
 
     @Override

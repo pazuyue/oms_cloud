@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class NoTicketsVO {
@@ -27,4 +28,9 @@ public class NoTicketsVO {
      */
     @NotBlank(message = "备注不能为空")
     private String remarks;
+
+    /**
+     * 品牌信息
+     */
+    private List<String> brandCodes;
 }
