@@ -61,7 +61,5 @@ public class NoTicketsController {
         if (noTicketsGoodsTmpService.submitExamine(noSn))
             return Result.success();
         return Result.failed("审核失败");
-
-
     }
 }

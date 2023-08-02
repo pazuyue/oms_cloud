@@ -105,6 +105,7 @@ public class NoTicketsGoodsTmpServiceImpl extends ServiceImpl<NoTicketsGoodsTmpM
         ticketsGoods.setGoodsName(tmp.getGoodsName());
         ticketsGoods.setPurchasePrice(tmp.getPurchasePrice());
         ticketsGoods.setZpNumberExpected(tmp.getZpNumberExpected());
+        ticketsGoods.setCompanyCode(jwtInfo.getCompanyCode());
         return ticketsGoods;
     }
 
