@@ -105,24 +105,4 @@ public class WmsTicketsGoods implements Serializable {
      * wms的出入库时间
      */
     private Date wmsActuallyTime;
-
-    /**
-     * 变动后库存-正品(用来记录本次出入库后的库存快照)
-     */
-    private Long afterNumberHg;
-
-    /**
-     * 变动后库存-次品(用来记录本次出入库后的库存快照)
-     */
-    private Long afterNumberCp;
-
-    /**
-     * 打包的正品数据
-     */
-    private Integer acceptNumberHg;
-
-    /**
-     * 打包的次品数据
-     */
-    private Integer acceptNumberCp;
 }
