@@ -31,14 +31,9 @@ public class WmsTickets implements Serializable {
     private String sn;
 
     /**
-     * t_channel.id
-     */
-    private Long channelId;
-
-    /**
      * 出入库类型，0：出库，1：入库
      */
-    private Boolean ticketType;
+    private Integer ticketType;
 
     /**
      * 关联单据号

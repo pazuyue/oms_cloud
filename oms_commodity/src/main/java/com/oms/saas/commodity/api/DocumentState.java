@@ -6,7 +6,9 @@ public enum DocumentState {
     CREATE(1,"创建"),
     AUDIT(2,"待审核"),
     WAITWAREHOUSING(3,"待入库"),
-    WAREHOUSINGCOMPLETED(4,"已入库");
+    WAREHOUSINGCOMPLETED(4,"已入库"),
+    WAREHOUSING(1,"入库"),
+    OUTBOUND(2,"出库");
     private int code;
     private String msg;
     private DocumentState(int code, String msg) {

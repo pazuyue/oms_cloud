@@ -1,12 +1,11 @@
 package com.oms.saas.commodity.service.impl.Warehouse;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.oms.saas.commodity.Entity.Goods.GoodsSkuSnInfo;
-import com.oms.saas.commodity.Entity.Warehouse.NoTickets;
-import com.oms.saas.commodity.Entity.Warehouse.NoTicketsGoods;
-import com.oms.saas.commodity.Entity.Warehouse.NoTicketsGoodsTmp;
+import com.oms.saas.commodity.Entity.Warehouse.*;
 import com.oms.saas.commodity.Vo.Export.NoTicketsGoodsTmpVO;
 import com.oms.saas.commodity.api.DocumentState;
 import com.oms.saas.commodity.dto.JwtInfo;
@@ -16,6 +15,7 @@ import com.oms.saas.commodity.service.Warehouse.NoTicketsGoodsService;
 import com.oms.saas.commodity.service.Warehouse.NoTicketsGoodsTmpService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.oms.saas.commodity.service.Warehouse.NoTicketsService;
+import com.oms.saas.commodity.service.Warehouse.WmsTicketsGoodsService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +41,8 @@ public class NoTicketsGoodsTmpServiceImpl extends ServiceImpl<NoTicketsGoodsTmpM
     private NoTicketsGoodsService noTicketsGoodsService;
     @Resource
     private NoTicketsService noTicketsService;
+    @Resource
+    private WmsTicketsGoodsService wmsTicketsGoodsService;
     @Resource
     private JwtInfo jwtInfo;
 
@@ -73,6 +75,59 @@ public class NoTicketsGoodsTmpServiceImpl extends ServiceImpl<NoTicketsGoodsTmpM
             priceExpected = priceExpected.add(noTicketsGoods.getPurchasePrice());
         }
         return saveNoTicketsGoods(ticketsGoodsList,numberExpected,priceExpected,noSn);
+    }
+
+    @Override
+    public boolean examine(String noSn) {
+        QueryWrapper<NoTickets> query = new QueryWrapper<>();
+        query.eq("no_sn", noSn);
+        NoTickets noTickets = noTicketsService.getOne(query);
+        Integer state = noTickets.getNoState();
+        if (state != DocumentState.AUDIT.getCode()){
+            throw new RuntimeException("采购入库单非待审核状态");
+        }
+        createWarehousingNotificationOrder(noSn);
+        return false;
+    }
+
+    /**
+     * 创建入库单
+     * @param noSn
+     * @return
+     */
+    public boolean createWarehousingNotificationOrder(String noSn)
+    {
+        String sn = "CG"+ IdUtil.simpleUUID();
+        QueryWrapper<NoTicketsGoods> query = new QueryWrapper<>();
+        query.eq("no_sn", noSn);
+        List<NoTicketsGoods> list = noTicketsGoodsService.list(query);
+        ArrayList<WmsTicketsGoods> wmsTicketsGoodsArrayList = new ArrayList<>();
+        for (NoTicketsGoods noTicketsGoods : list){
+            WmsTicketsGoods wmsTicketsGoods = new WmsTicketsGoods();
+            wmsTicketsGoods.setSn(sn);
+            wmsTicketsGoods.setInventoryType("ZP");
+            wmsTicketsGoods.setSkuSn(noTicketsGoods.getSkuSn());
+            wmsTicketsGoods.setGoodsSn(noTicketsGoods.getGoodsSn());
+            wmsTicketsGoods.setBarcodeSn(noTicketsGoods.getBarcodeSn());
+            wmsTicketsGoods.setGoodsName(noTicketsGoods.getGoodsName());
+            wmsTicketsGoods.setBatchCode(noTicketsGoods.getBatchCode());
+            wmsTicketsGoods.setPurchasePrice(noTicketsGoods.getPurchasePrice());
+            wmsTicketsGoods.setNumberExpected(noTicketsGoods.getZpNumberExpected());
+            wmsTicketsGoods.setCompanyCode(noTicketsGoods.getCompanyCode());
+
+            wmsTicketsGoodsArrayList.add(wmsTicketsGoods);
+        }
+        QueryWrapper<NoTickets> query1 = new QueryWrapper<>();
+        query.eq("no_sn", noSn);
+        NoTickets one = noTicketsService.getOne(query1);
+        WmsTickets tickets = new WmsTickets();
+        tickets.setSn(sn);
+        tickets.setTicketType(DocumentState.WAREHOUSING.getCode());
+        tickets.setRelationSn(one.getNoSn());
+        tickets.setOriginalSn(one.getPoSn());
+
+        wmsTicketsGoodsService.saveBatch(wmsTicketsGoodsArrayList);
+        return true;
     }
 
     /**

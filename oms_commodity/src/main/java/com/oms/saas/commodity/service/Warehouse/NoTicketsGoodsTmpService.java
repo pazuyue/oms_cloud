@@ -31,4 +31,11 @@ public interface NoTicketsGoodsTmpService extends IService<NoTicketsGoodsTmp> {
      */
     public boolean submitExamine(String noSn);
 
+    /**
+     * 审核
+     * @param noSn
+     * @return
+     */
+    public boolean examine(String noSn);
+
 }
