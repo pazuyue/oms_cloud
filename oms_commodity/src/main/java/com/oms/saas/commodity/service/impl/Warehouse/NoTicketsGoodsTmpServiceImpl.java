@@ -126,6 +126,7 @@ public class NoTicketsGoodsTmpServiceImpl extends ServiceImpl<NoTicketsGoodsTmpM
         tickets.setRelationSn(one.getNoSn());
         tickets.setOriginalSn(one.getPoSn());
 
+        tickets.setCompanyCode(jwtInfo.getCompanyCode());
         wmsTicketsGoodsService.saveBatch(wmsTicketsGoodsArrayList);
         return true;
     }

@@ -48,7 +48,7 @@ public class WmsTickets implements Serializable {
     /**
      * 指派的仓库编码
      */
-    private String storeCode;
+    private String wmsSimulationCode;
 
     /**
      * 指派的仓库名称
