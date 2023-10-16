@@ -46,6 +46,10 @@ public class NoTickets implements Serializable {
     private String noName;
 
     /**
+     * 入库虚仓仓库编码
+     */
+    private String wmsSimulationCode;
+    /**
      * 批次编号
      */
     private String batchCode;

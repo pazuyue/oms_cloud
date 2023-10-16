@@ -53,7 +53,7 @@ public class WmsTickets implements Serializable {
     /**
      * 指派的仓库名称
      */
-    private String storeName;
+    private String wmsSimulationName;
 
     /**
      * 1电商仓，2门店

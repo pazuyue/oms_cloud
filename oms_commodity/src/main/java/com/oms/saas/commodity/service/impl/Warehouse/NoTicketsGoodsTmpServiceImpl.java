@@ -11,11 +11,8 @@ import com.oms.saas.commodity.api.DocumentState;
 import com.oms.saas.commodity.dto.JwtInfo;
 import com.oms.saas.commodity.mapper.Warehouse.NoTicketsGoodsTmpMapper;
 import com.oms.saas.commodity.service.Goods.GoodsSkuSnInfoService;
-import com.oms.saas.commodity.service.Warehouse.NoTicketsGoodsService;
-import com.oms.saas.commodity.service.Warehouse.NoTicketsGoodsTmpService;
+import com.oms.saas.commodity.service.Warehouse.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.oms.saas.commodity.service.Warehouse.NoTicketsService;
-import com.oms.saas.commodity.service.Warehouse.WmsTicketsGoodsService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +42,8 @@ public class NoTicketsGoodsTmpServiceImpl extends ServiceImpl<NoTicketsGoodsTmpM
     private WmsTicketsGoodsService wmsTicketsGoodsService;
     @Resource
     private JwtInfo jwtInfo;
+    @Resource
+    private WmsSimulationStoreInfoService simulationStoreInfoService;
 
     @Override
     public boolean save(List<NoTicketsGoodsTmpVO> list, String noSn) {
@@ -120,12 +119,18 @@ public class NoTicketsGoodsTmpServiceImpl extends ServiceImpl<NoTicketsGoodsTmpM
         QueryWrapper<NoTickets> query1 = new QueryWrapper<>();
         query.eq("no_sn", noSn);
         NoTickets one = noTicketsService.getOne(query1);
+        WmsSimulationStoreInfo wmsSimulation = simulationStoreInfoService.getOne(new QueryWrapper<WmsSimulationStoreInfo>().eq("wms_simulation_code", one.getWmsSimulationCode()));
+
+        if (ObjectUtil.isEmpty(wmsSimulation))
+            throw new RuntimeException("虚仓:"+one.getWmsSimulationCode()+"信息不存在");
+
         WmsTickets tickets = new WmsTickets();
         tickets.setSn(sn);
         tickets.setTicketType(DocumentState.WAREHOUSING.getCode());
         tickets.setRelationSn(one.getNoSn());
         tickets.setOriginalSn(one.getPoSn());
-
+        tickets.setWmsSimulationCode(wmsSimulation.getWmsSimulationCode());
+        tickets.setWmsSimulationName(wmsSimulation.getWmsSimulationName());
         tickets.setCompanyCode(jwtInfo.getCompanyCode());
         wmsTicketsGoodsService.saveBatch(wmsTicketsGoodsArrayList);
         return true;

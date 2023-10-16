@@ -2,6 +2,7 @@ package com.oms.saas.commodity.Controller.Brand;
 
 import com.oms.saas.commodity.api.Result;
 import com.oms.saas.commodity.dto.JwtInfo;
+import com.oms.saas.commodity.service.FeignClients.Brand.FeginBrandService;
 import com.oms.saas.commodity.until.RestTemplateUtil;
 import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
@@ -24,6 +25,9 @@ public class BrandController {
     @Resource
     private JwtInfo jwtInfo;
 
+    @Resource
+    private FeginBrandService feginBrandService;
+
     @SneakyThrows
     @PostMapping(value = "/getBrandInfoByUserId")
     public Result getBrandInfoByUserId()
@@ -33,6 +37,12 @@ public class BrandController {
         paramMap.add("userId", jwtInfo.getUserId());
 
         return restTemplateUtil.exchangePost("http://commonSecurity/brandInfo/getBrandByUserId", HttpMethod.POST, paramMap);
+    }
+
+    @SneakyThrows
+    @PostMapping(value = "/getBrandByUserId")
+    public Result getBrandByUserId(){
+        return feginBrandService.getBrandByUserId(jwtInfo.getToken(),jwtInfo.getUserId());
     }
 
 

@@ -14,6 +14,12 @@ public class NoTicketsVO {
      */
     @NotBlank(message = "关联采购单号不能为空")
     private String poSn;
+
+    /**
+     * 关联采购单号
+     */
+    @NotBlank(message = "入库虚仓仓库编码不能为空")
+    private String wmsSimulationCode;
     /**
      * 入库单名称
      */
