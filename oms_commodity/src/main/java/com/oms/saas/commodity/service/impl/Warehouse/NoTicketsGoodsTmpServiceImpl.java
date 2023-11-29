@@ -39,6 +39,8 @@ public class NoTicketsGoodsTmpServiceImpl extends ServiceImpl<NoTicketsGoodsTmpM
     @Resource
     private NoTicketsService noTicketsService;
     @Resource
+    private WmsTicketsService wmsTicketsService;
+    @Resource
     private WmsTicketsGoodsService wmsTicketsGoodsService;
     @Resource
     private JwtInfo jwtInfo;
@@ -131,7 +133,9 @@ public class NoTicketsGoodsTmpServiceImpl extends ServiceImpl<NoTicketsGoodsTmpM
         tickets.setOriginalSn(one.getPoSn());
         tickets.setWmsSimulationCode(wmsSimulation.getWmsSimulationCode());
         tickets.setWmsSimulationName(wmsSimulation.getWmsSimulationName());
+        tickets.setStoreType(DocumentState.E_COMMERCE_WAREHOUSE.getCode());
         tickets.setCompanyCode(jwtInfo.getCompanyCode());
+        wmsTicketsService.save(tickets);
         wmsTicketsGoodsService.saveBatch(wmsTicketsGoodsArrayList);
         return true;
     }

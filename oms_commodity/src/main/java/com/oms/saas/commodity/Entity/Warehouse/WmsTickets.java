@@ -58,7 +58,7 @@ public class WmsTickets implements Serializable {
     /**
      * 1电商仓，2门店
      */
-    private Byte storeType;
+    private Integer storeType;
 
     /**
      * 配送方式代码(批派到WMS)
