@@ -1,8 +1,6 @@
-package com.oms.saas.commodity.dto;
+package com.oms.saas.commodity.dto.Store;
 
-import com.oms.saas.commodity.Entity.Warehouse.OwnerInfo;
 import lombok.Data;
-
 import java.util.Date;
 
 @Data
@@ -16,5 +14,5 @@ public class SimulationStoreInfoDto {
     private String companyCode;
     private Date createTime;
     private Date modifyTime;
-    private OwnerInfo ownerInfo;
+    private OwnerInfoDto ownerInfo;
 }

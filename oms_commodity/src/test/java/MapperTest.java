@@ -1,8 +1,7 @@
 
-import com.oms.saas.commodity.Entity.Warehouse.OwnerInfo;
-import com.oms.saas.commodity.Entity.Warehouse.WmsSimulationStoreInfo;
 import com.oms.saas.commodity.OmsCommodityApplication;
-import com.oms.saas.commodity.dto.SimulationStoreInfoDto;
+import com.oms.saas.commodity.dto.Store.OwnerInfoDto;
+import com.oms.saas.commodity.dto.Store.SimulationStoreInfoDto;
 import com.oms.saas.commodity.mapper.Warehouse.OwnerInfoMapper;
 import com.oms.saas.commodity.mapper.Warehouse.WmsSimulationStoreInfoMapper;
 import jakarta.annotation.Resource;
@@ -26,13 +25,11 @@ public class MapperTest {
     @Test
     public void testLeftJoin(){
        try {
-           //OwnerInfo ownerInfo = ownerInfoMapper.selectOwnerInfoByOwnerCode("XHS02");
+           //OwnerInfoDto ownerInfo = ownerInfoMapper.selectOwnerInfoByOwnerCodeWithRealStore("XHS01");
            SimulationStoreInfoDto simulationStoreInfo = simulationStoreInfoMapper.selectSimulationStoreInfoWtihOwnerInfo(1);
-           System.out.println("ok");
-           System.out.println(simulationStoreInfo);
+           System.out.println(simulationStoreInfo.getOwnerInfo().getRealStoreInfo());
        }catch (Throwable exception){
-           System.out.println("fail");
-           System.out.println(exception.getCause().getMessage());
+           System.out.println("fail"+exception.getCause().getMessage());
        }
     }
 }
