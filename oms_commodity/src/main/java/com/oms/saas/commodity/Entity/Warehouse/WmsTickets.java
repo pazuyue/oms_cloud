@@ -245,4 +245,6 @@ public class WmsTickets implements Serializable {
      * WMS仓库接单回调到OMS时间
      */
     private Date acceptCallbackTime;
+
+    private Integer actualWarehouse;
 }
