@@ -136,7 +136,10 @@ public class NoTicketsGoodsTmpServiceImpl extends ServiceImpl<NoTicketsGoodsTmpM
         tickets.setWmsSimulationCode(simulationStoreInfo.getWmsSimulationCode());
         tickets.setWmsSimulationName(simulationStoreInfo.getWmsSimulationName());
         tickets.setStoreType(DocumentState.E_COMMERCE_WAREHOUSE.getCode());
+        tickets.setRemark(one.getRemarks());
         tickets.setCompanyCode(jwtInfo.getCompanyCode());
+        tickets.setUserName(jwtInfo.getNickName());
+        tickets.setActualWarehouse(simulationStoreInfo.getOwnerInfo().getRealStoreInfo().getActualWarehouse());
         wmsTicketsService.save(tickets);
         wmsTicketsGoodsService.saveBatch(wmsTicketsGoodsArrayList);
         return true;

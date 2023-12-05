@@ -246,5 +246,5 @@ public class WmsTickets implements Serializable {
      */
     private Date acceptCallbackTime;
 
-    private Integer actualWarehouse;
+    private Byte actualWarehouse;
 }
