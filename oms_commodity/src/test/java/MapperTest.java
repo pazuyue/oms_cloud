@@ -26,7 +26,7 @@ public class MapperTest {
     public void testLeftJoin(){
        try {
            //OwnerInfoDto ownerInfo = ownerInfoMapper.selectOwnerInfoByOwnerCodeWithRealStore("XHS01");
-           SimulationStoreInfoDto simulationStoreInfo = simulationStoreInfoMapper.selectSimulationStoreInfoWtihOwnerInfo(1);
+           SimulationStoreInfoDto simulationStoreInfo = simulationStoreInfoMapper.selectSimulationStoreInfoWtihOwnerInfo("VC0001");
            System.out.println(simulationStoreInfo.getOwnerInfo().getRealStoreInfo());
        }catch (Throwable exception){
            System.out.println("fail"+exception.getCause().getMessage());

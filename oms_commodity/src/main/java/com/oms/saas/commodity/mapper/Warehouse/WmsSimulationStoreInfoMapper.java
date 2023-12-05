@@ -17,11 +17,11 @@ import org.apache.ibatis.annotations.*;
  */
 public interface WmsSimulationStoreInfoMapper extends BaseMapper<WmsSimulationStoreInfo> {
 
-    @Select("select * from wms_simulation_store_info where id=#{id}")
+    @Select("select * from wms_simulation_store_info where wms_simulation_code=#{wms_simulation_code}")
     @Results({
             @Result(property = "ownerCode", column = "owner_code"),
             @Result(property = "ownerInfo", column = "owner_code", javaType = OwnerInfoDto.class,
                     one = @One(select = "com.oms.saas.commodity.mapper.Warehouse.OwnerInfoMapper.selectOwnerInfoByOwnerCodeWithRealStore"))
     })
-    SimulationStoreInfoDto selectSimulationStoreInfoWtihOwnerInfo(int id);
+    SimulationStoreInfoDto selectSimulationStoreInfoWtihOwnerInfo(String wms_simulation_code);
 }
