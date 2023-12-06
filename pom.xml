@@ -7,6 +7,7 @@
         <module>oms_commodity</module>
         <module>oms_platform_management</module>
         <module>saas_common_security</module>
+        <module>oms_inventory_manage</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
