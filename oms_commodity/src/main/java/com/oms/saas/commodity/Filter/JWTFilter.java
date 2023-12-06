@@ -10,14 +10,17 @@ import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 
-@WebFilter // 注册拦截器，并添加拦截路径‘/user/getOne’
+@Order(1)
+@Component // 注册拦截器
 public class JWTFilter implements Filter {
     @Resource
     private RestTemplate restTemplate;
@@ -27,12 +30,12 @@ public class JWTFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         Filter.super.init(filterConfig);
-        System.out.println("===> TestFilter init");
+        System.out.println("===> JWTFilter init");
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("===> chain.doFilter 后执行处理 response 的相关方法");
+        System.out.println("===> JWTFilter.doFilter 后执行处理 response 的相关方法");
         // 在response header里设置一个token
         if (checkToken(servletRequest,servletResponse))
             filterChain.doFilter(servletRequest, servletResponse);// 处理请求和响应的分界线
