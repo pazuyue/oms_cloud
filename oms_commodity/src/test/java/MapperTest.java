@@ -4,6 +4,7 @@ import com.oms.saas.commodity.dto.Store.OwnerInfoDto;
 import com.oms.saas.commodity.dto.Store.SimulationStoreInfoDto;
 import com.oms.saas.commodity.mapper.Warehouse.OwnerInfoMapper;
 import com.oms.saas.commodity.mapper.Warehouse.WmsSimulationStoreInfoMapper;
+import com.oms.saas.commodity.service.impl.Warehouse.WmsSimulationStoreInfoServiceImpl;
 import jakarta.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +21,6 @@ public class MapperTest {
     private WmsSimulationStoreInfoMapper simulationStoreInfoMapper;
     @Resource
     private OwnerInfoMapper ownerInfoMapper;
-
 
     @Test
     public void testLeftJoin(){
