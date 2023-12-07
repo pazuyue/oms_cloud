@@ -30,7 +30,7 @@ public class JWTFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         Filter.super.init(filterConfig);
-        System.out.println("===> JWTFilter init");
+        System.out.println("===>Inventory JWTFilter init");
     }
 
     @Override
