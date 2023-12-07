@@ -1,4 +1,4 @@
-package com.saas.inventory.Config;
+package com.oms.saas.inventory.Config;
 
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;

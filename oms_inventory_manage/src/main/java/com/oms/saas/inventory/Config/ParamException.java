@@ -1,7 +1,8 @@
-package com.saas.inventory.Config;
+package com.oms.saas.inventory.Config;
 
-import com.saas.inventory.api.Result;
-import com.saas.inventory.api.ResultCode;
+
+import com.oms.saas.inventory.api.Result;
+import com.oms.saas.inventory.api.ResultCode;
 import jakarta.validation.ConstraintDeclarationException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;

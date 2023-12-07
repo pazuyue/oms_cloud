@@ -1,7 +1,6 @@
-package com.saas.inventory.Controller;
+package com.oms.saas.inventory.Controller;
 
-import com.saas.inventory.api.Result;
-import jakarta.annotation.Resource;
+import com.oms.saas.inventory.api.Result;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.saas.inventory.api;
+package com.oms.saas.inventory.api;
 
 
 /**

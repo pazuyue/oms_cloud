@@ -1,8 +1,8 @@
-package com.saas.inventory.until;
+package com.oms.saas.inventory.until;
 
 import cn.hutool.core.lang.Console;
-import com.saas.inventory.api.Result;
-import com.saas.inventory.dto.jwt.JwtInfo;
+import com.oms.saas.inventory.api.Result;
+import com.oms.saas.inventory.dto.jwt.JwtInfo;
 import jakarta.annotation.Resource;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;

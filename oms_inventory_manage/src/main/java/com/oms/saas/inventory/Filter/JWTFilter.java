@@ -1,10 +1,10 @@
-package com.saas.inventory.Filter;
+package com.oms.saas.inventory.Filter;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.saas.inventory.api.Result;
-import com.saas.inventory.dto.jwt.JwtInfo;
+import com.oms.saas.inventory.api.Result;
+import com.oms.saas.inventory.dto.jwt.JwtInfo;
 import jakarta.annotation.Resource;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,8 +19,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
-@Order(1)
-@Component // 注册拦截器
+//@Order(1)
+//@Component // 注册拦截器
 public class JWTFilter implements Filter {
     @Resource
     private RestTemplate restTemplate;

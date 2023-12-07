@@ -1,4 +1,4 @@
-package com.saas.inventory.dto.jwt;
+package com.oms.saas.inventory.dto.jwt;
 
 import lombok.Data;
 import org.springframework.context.annotation.Scope;

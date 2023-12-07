@@ -1,4 +1,4 @@
-package com.saas.inventory.until;
+package com.oms.saas.inventory.until;
 
 import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.saas.inventory;
+package com.oms.saas.inventory;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 //@ServletComponentScan
 @EnableFeignClients
-@MapperScan({"com.oms.saas.commodity.mapper.*"})
+@MapperScan({"com.oms.saas.inventory.mapper.*"})
 @SpringBootApplication
 public class OmsInventoryManageApplication {
 

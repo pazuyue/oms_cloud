@@ -1,4 +1,4 @@
-package com.saas.inventory.Config;
+package com.oms.saas.inventory.Config;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
