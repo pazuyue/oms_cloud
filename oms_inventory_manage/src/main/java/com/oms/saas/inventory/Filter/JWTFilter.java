@@ -19,8 +19,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
-//@Order(1)
-//@Component // 注册拦截器
+@Order(1)
+@Component // 注册拦截器
 public class JWTFilter implements Filter {
     @Resource
     private RestTemplate restTemplate;
@@ -35,7 +35,7 @@ public class JWTFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("===> JWTFilter.doFilter 后执行处理 response 的相关方法");
+        System.out.println("===>Inventory JWTFilter.doFilter 后执行处理 response 的相关方法");
         // 在response header里设置一个token
         if (checkToken(servletRequest,servletResponse))
             filterChain.doFilter(servletRequest, servletResponse);// 处理请求和响应的分界线
@@ -69,10 +69,10 @@ public class JWTFilter implements Filter {
             jwtInfo.setUserId(userId);
             jwtInfo.setToken(token);
             jwtInfo.setNickName(nickName);
-            System.out.println("===> chain.doFilter 后执行处理 jwtInfo 的相关方法"+jwtInfo.toString());
+            System.out.println("===> Inventory.doFilter 后执行处理 jwtInfo 的相关方法"+jwtInfo.toString());
             return true;
         }catch (Exception exception){
-            System.out.println("===> chain.doFilter 后执行处理 exception 的相关方法"+exception.getMessage());
+            System.out.println("===> Inventory.doFilter 后执行处理 exception 的相关方法"+exception.getMessage());
             // 异常捕获，发送到expiredJwtException
             req.setAttribute("expiredJwtException", exception.getMessage());
             //将异常分发到/expiredJwtException控制器
