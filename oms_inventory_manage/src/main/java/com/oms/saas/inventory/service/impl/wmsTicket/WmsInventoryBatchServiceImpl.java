@@ -2,11 +2,15 @@ package com.oms.saas.inventory.service.impl.wmsTicket;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.oms.saas.inventory.entity.wmsTicket.WmsInventory;
 import com.oms.saas.inventory.entity.wmsTicket.WmsInventoryBatch;
 import com.oms.saas.inventory.mapper.wmsTicket.WmsInventoryBatchMapper;
 import com.oms.saas.inventory.service.wmsTicket.WmsInventoryBatchService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.oms.saas.inventory.service.wmsTicket.WmsInventoryService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Wrapper;
 
@@ -21,14 +25,14 @@ import java.sql.Wrapper;
 @Service
 public class WmsInventoryBatchServiceImpl extends ServiceImpl<WmsInventoryBatchMapper, WmsInventoryBatch> implements WmsInventoryBatchService {
 
-    public Boolean addInventory(WmsInventoryBatch wmsInventoryBatch)
+    @Resource
+    private WmsInventoryServiceImpl wmsInventoryService;
+
+    @Transactional
+    public Boolean addInventory(WmsInventory wmsInventory,WmsInventoryBatch wmsInventoryBatch)
     {
-       try {
-           this.getBaseMapper().insertOrUpdate(wmsInventoryBatch);
-           return true;
-       }catch (Throwable e){
-           System.out.println(e.getCause().getMessage());
-       }
-       return false;
+        wmsInventoryService.getBaseMapper().insertOrUpdate(wmsInventory);
+        this.getBaseMapper().insertOrUpdate(wmsInventoryBatch);
+        return true;
     }
 }

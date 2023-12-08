@@ -1,5 +1,6 @@
 package com.oms.saas.inventory.Controller.wmsTicket;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.oms.saas.inventory.api.Result;
 import com.oms.saas.inventory.entity.wmsTicket.WmsInventoryBatch;
 import com.oms.saas.inventory.service.impl.wmsTicket.WmsInventoryBatchServiceImpl;
@@ -62,14 +63,19 @@ public class WmsInventoryController {
 
     /**
      * 入库 - 库存增加
-     * @param params
+     * @param wmsInventoryBatch
      * @return
      */
     @PostMapping(value = "/addInventory")
     @SneakyThrows
-    public Result<Object> addInventory(WmsInventoryBatch params){
-        System.out.println(params.toString());
-        wmsInventoryBatchService.addInventory(params);
-        return Result.success();
+    public Result<Object> addInventory(WmsInventoryBatch wmsInventoryBatch){
+        WmsInventory wmsInventory = new WmsInventory();
+       try {
+           BeanUtil.copyProperties(wmsInventoryBatch, wmsInventory);
+           wmsInventoryBatchService.addInventory(wmsInventory,wmsInventoryBatch);
+           return Result.success();
+       }catch (Throwable e){
+           return Result.failed(e.getMessage());
+       }
     }
 }
