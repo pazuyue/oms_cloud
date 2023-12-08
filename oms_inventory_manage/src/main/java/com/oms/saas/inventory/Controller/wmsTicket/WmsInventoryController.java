@@ -1,6 +1,10 @@
 package com.oms.saas.inventory.Controller.wmsTicket;
 
 import com.oms.saas.inventory.api.Result;
+import com.oms.saas.inventory.entity.wmsTicket.WmsInventoryBatch;
+import com.oms.saas.inventory.service.impl.wmsTicket.WmsInventoryBatchServiceImpl;
+import jakarta.annotation.Resource;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
@@ -24,8 +28,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class WmsInventoryController {
 
 
-    @Autowired
+    @Resource
     private WmsInventoryService wmsInventoryService;
+    @Resource
+    private WmsInventoryBatchServiceImpl wmsInventoryBatchService;
+
+
     @Value("${pageable.page.size:10}")
     private Integer pageSize;
 
@@ -49,6 +57,19 @@ public class WmsInventoryController {
     @PostMapping(value = "/create")
     public Result<Object> create(WmsInventory params) {
         wmsInventoryService.save(params);
+        return Result.success();
+    }
+
+    /**
+     * 入库 - 库存增加
+     * @param params
+     * @return
+     */
+    @PostMapping(value = "/addInventory")
+    @SneakyThrows
+    public Result<Object> addInventory(WmsInventoryBatch params){
+        System.out.println(params.toString());
+        wmsInventoryBatchService.addInventory(params);
         return Result.success();
     }
 }
