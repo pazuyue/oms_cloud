@@ -19,8 +19,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
-@Order(1)
-@Component // 注册拦截器
+//@Order(1)
+//@Component // 注册拦截器
 public class JWTFilter implements Filter {
     @Resource
     private RestTemplate restTemplate;
