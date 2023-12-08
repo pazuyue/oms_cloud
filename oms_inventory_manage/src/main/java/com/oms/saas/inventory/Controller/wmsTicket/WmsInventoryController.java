@@ -1,5 +1,7 @@
-package com.oms.saas.inventory.controller.wmsTicket;
+package com.oms.saas.inventory.Controller.wmsTicket;
 
+import com.oms.saas.inventory.api.Result;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -17,41 +19,36 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author 月光光
  * @since 2023-12-08
  */
-@Controller
+@RestController
 @RequestMapping("/wms-inventory")
 public class WmsInventoryController {
 
 
     @Autowired
     private WmsInventoryService wmsInventoryService;
+    @Value("${pageable.page.size:10}")
+    private Integer pageSize;
 
-    @GetMapping(value = "/")
-    public ResponseEntity<Page<WmsInventory>> list(@RequestParam(required = false) Integer current, @RequestParam(required = false) Integer pageSize) {
+    @GetMapping(value = "/list")
+    public Result<Page<WmsInventory>> list(@RequestParam(required = false) Integer current, @RequestParam(required = false) Integer pageSize) {
         if (current == null) {
             current = 1;
         }
         if (pageSize == null) {
-            pageSize = 10;
+            pageSize = this.pageSize;
         }
         Page<WmsInventory> aPage = wmsInventoryService.page(new Page<>(current, pageSize));
-        return new ResponseEntity<>(aPage, HttpStatus.OK);
+        return Result.success(aPage);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<WmsInventory> getById(@PathVariable("id") String id) {
-        return new ResponseEntity<>(wmsInventoryService.getById(id), HttpStatus.OK);
+    public Result<WmsInventory> getById(@PathVariable("id") String id) {
+        return  Result.success(wmsInventoryService.getById(id));
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<Object> create(@RequestBody WmsInventory params) {
+    public Result<Object> create(WmsInventory params) {
         wmsInventoryService.save(params);
-        return new ResponseEntity<>("created successfully", HttpStatus.OK);
-    }
-
-
-    @PostMapping(value = "/update")
-    public ResponseEntity<Object> update(@RequestBody WmsInventory params) {
-        wmsInventoryService.updateById(params);
-        return new ResponseEntity<>("updated successfully", HttpStatus.OK);
+        return Result.success();
     }
 }
