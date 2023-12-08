@@ -2,6 +2,7 @@ package com.oms.saas.inventory.Controller.wmsTicket;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.oms.saas.inventory.api.Result;
+import com.oms.saas.inventory.entity.wmsTicket.TSkuInventory;
 import com.oms.saas.inventory.entity.wmsTicket.WmsInventoryBatch;
 import com.oms.saas.inventory.service.impl.wmsTicket.WmsInventoryBatchServiceImpl;
 import jakarta.annotation.Resource;
@@ -52,7 +53,7 @@ public class WmsInventoryController {
 
     @GetMapping(value = "/{id}")
     public Result<WmsInventory> getById(@PathVariable("id") String id) {
-        return  Result.success(wmsInventoryService.getById(id));
+        return Result.success(wmsInventoryService.getById(id));
     }
 
     @PostMapping(value = "/create")
@@ -63,19 +64,22 @@ public class WmsInventoryController {
 
     /**
      * 入库 - 库存增加
+     *
      * @param wmsInventoryBatch
      * @return
      */
     @PostMapping(value = "/addInventory")
     @SneakyThrows
-    public Result<Object> addInventory(WmsInventoryBatch wmsInventoryBatch){
+    public Result<Object> addInventory(WmsInventoryBatch wmsInventoryBatch) {
         WmsInventory wmsInventory = new WmsInventory();
-       try {
-           BeanUtil.copyProperties(wmsInventoryBatch, wmsInventory);
-           wmsInventoryBatchService.addInventory(wmsInventory,wmsInventoryBatch);
-           return Result.success();
-       }catch (Throwable e){
-           return Result.failed(e.getMessage());
-       }
+        TSkuInventory skuInventory = new TSkuInventory();
+        try {
+            BeanUtil.copyProperties(wmsInventoryBatch, wmsInventory);
+            BeanUtil.copyProperties(wmsInventoryBatch, skuInventory);
+            wmsInventoryBatchService.addInventory(skuInventory,wmsInventory, wmsInventoryBatch);
+            return Result.success();
+        } catch (Throwable e) {
+            return Result.failed(e.getMessage());
+        }
     }
 }

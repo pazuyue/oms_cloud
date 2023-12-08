@@ -2,6 +2,7 @@ package com.oms.saas.inventory.service.impl.wmsTicket;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.oms.saas.inventory.entity.wmsTicket.TSkuInventory;
 import com.oms.saas.inventory.entity.wmsTicket.WmsInventory;
 import com.oms.saas.inventory.entity.wmsTicket.WmsInventoryBatch;
 import com.oms.saas.inventory.mapper.wmsTicket.WmsInventoryBatchMapper;
@@ -27,10 +28,13 @@ public class WmsInventoryBatchServiceImpl extends ServiceImpl<WmsInventoryBatchM
 
     @Resource
     private WmsInventoryServiceImpl wmsInventoryService;
+    @Resource
+    private TSkuInventoryServiceImpl skuInventoryService;
 
     @Transactional
-    public Boolean addInventory(WmsInventory wmsInventory,WmsInventoryBatch wmsInventoryBatch)
+    public Boolean addInventory(TSkuInventory skuInventory, WmsInventory wmsInventory, WmsInventoryBatch wmsInventoryBatch)
     {
+        skuInventoryService.getBaseMapper().insertOrUpdate(skuInventory);
         wmsInventoryService.getBaseMapper().insertOrUpdate(wmsInventory);
         this.getBaseMapper().insertOrUpdate(wmsInventoryBatch);
         return true;
