@@ -14,4 +14,10 @@ import com.oms.saas.commodity.Vo.Warehouse.NoTicketsVO;
  */
 public interface NoTicketsService extends IService<NoTickets> {
      boolean save(NoTicketsVO vo);
+     /**
+      * 审核
+      * @param noSn
+      * @return
+      */
+     public boolean examine(String noSn);
 }

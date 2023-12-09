@@ -72,7 +72,7 @@ public class NoTicketsController {
     @PostMapping(value = "/examine")
     @ResponseBody
     public Result examine(@RequestParam(value = "no_sn") String noSn){
-        if (noTicketsGoodsTmpService.examine(noSn))
+        if (ticketsService.examine(noSn))
             return Result.success();
         return Result.failed("审核失败");
     }
