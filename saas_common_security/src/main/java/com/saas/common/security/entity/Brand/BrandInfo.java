@@ -20,12 +20,6 @@ public class BrandInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer id;
-
-    /**
-     * 用户ID
-     */
-    private Integer userId;
-
     /**
      * 品牌编码
      */
