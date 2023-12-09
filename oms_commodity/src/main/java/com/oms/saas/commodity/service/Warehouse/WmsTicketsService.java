@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface WmsTicketsService extends IService<WmsTickets> {
 
+    public WmsTickets getOne(String sn);
 }

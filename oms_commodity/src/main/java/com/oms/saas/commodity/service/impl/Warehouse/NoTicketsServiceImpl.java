@@ -12,6 +12,7 @@ import com.oms.saas.commodity.dto.JwtInfo;
 import com.oms.saas.commodity.dto.Store.SimulationStoreInfoDto;
 import com.oms.saas.commodity.mapper.Warehouse.NoTicketsMapper;
 import com.oms.saas.commodity.mapper.Warehouse.WmsSimulationStoreInfoMapper;
+import com.oms.saas.commodity.service.Inventory.InventoryService;
 import com.oms.saas.commodity.service.Warehouse.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
@@ -40,11 +41,11 @@ public class NoTicketsServiceImpl extends ServiceImpl<NoTicketsMapper, NoTickets
     @Resource
     private WmsTicketsGoodsService wmsTicketsGoodsService;
     @Resource
-    private NoTicketsService noTicketsService;
-    @Resource
     private NoTicketsGoodsService noTicketsGoodsService;
     @Resource
     private WmsSimulationStoreInfoMapper simulationStoreInfoMapper;
+    @Resource
+    private InventoryService inventoryService;
 
     @Override
     public boolean save(NoTicketsVO vo) {
@@ -74,7 +75,7 @@ public class NoTicketsServiceImpl extends ServiceImpl<NoTicketsMapper, NoTickets
     public boolean examine(String noSn) {
         QueryWrapper<NoTickets> query = new QueryWrapper<>();
         query.eq("no_sn", noSn);
-        NoTickets noTickets = noTicketsService.getOne(query);
+        NoTickets noTickets = this.getOne(query);
         Integer state = noTickets.getNoState();
         if (state != DocumentState.AUDIT.getCode()) {
             throw new RuntimeException("采购入库单非待审核状态");
@@ -112,7 +113,7 @@ public class NoTicketsServiceImpl extends ServiceImpl<NoTicketsMapper, NoTickets
         }
         QueryWrapper<NoTickets> query1 = new QueryWrapper<>();
         query.eq("no_sn", noSn);
-        NoTickets one = noTicketsService.getOne(query1);
+        NoTickets one = this.getOne(query1);
         //WmsSimulationStoreInfo wmsSimulation = simulationStoreInfoService.getOne(new QueryWrapper<WmsSimulationStoreInfo>().eq("wms_simulation_code", one.getWmsSimulationCode()));
         SimulationStoreInfoDto simulationStoreInfo = simulationStoreInfoMapper.selectSimulationStoreInfoWtihOwnerInfo(one.getWmsSimulationCode());
 
@@ -133,7 +134,8 @@ public class NoTicketsServiceImpl extends ServiceImpl<NoTicketsMapper, NoTickets
         tickets.setActualWarehouse(simulationStoreInfo.getOwnerInfo().getRealStoreInfo().getActualWarehouse());
         wmsTicketsService.save(tickets);
         wmsTicketsGoodsService.saveBatch(wmsTicketsGoodsArrayList);
-        //if (tickets.getActualWarehouse() == DocumentState.VIRTUALLY_WAREHOUSE.getCode())
+        if (tickets.getActualWarehouse() == DocumentState.VIRTUALLY_WAREHOUSE.getCode())
+            inventoryService.CGInventoryCallback(sn);
         return true;
     }
 }

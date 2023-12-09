@@ -2,6 +2,9 @@ package com.oms.saas.commodity.mapper.Warehouse;
 
 import com.oms.saas.commodity.Entity.Warehouse.WmsTicketsGoods;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface WmsTicketsGoodsMapper extends BaseMapper<WmsTicketsGoods> {
 
+    @Select("select * from wms_tickets_goods WHERE sn =#{sn}")
+    List<WmsTicketsGoods> selectBySn(String sn);
 }

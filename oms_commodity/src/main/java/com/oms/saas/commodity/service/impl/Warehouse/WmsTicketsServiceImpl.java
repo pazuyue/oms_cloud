@@ -1,5 +1,6 @@
 package com.oms.saas.commodity.service.impl.Warehouse;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.oms.saas.commodity.Entity.Warehouse.WmsTickets;
 import com.oms.saas.commodity.mapper.Warehouse.WmsTicketsMapper;
 import com.oms.saas.commodity.service.Warehouse.WmsTicketsService;
@@ -17,4 +18,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class WmsTicketsServiceImpl extends ServiceImpl<WmsTicketsMapper, WmsTickets> implements WmsTicketsService {
 
+    public WmsTickets getOne(String sn){
+        QueryWrapper<WmsTickets> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("sn",sn);
+        return this.getOne(queryWrapper);
+    }
 }

@@ -4,6 +4,8 @@ import com.oms.saas.commodity.dto.Store.OwnerInfoDto;
 import com.oms.saas.commodity.dto.Store.SimulationStoreInfoDto;
 import com.oms.saas.commodity.mapper.Warehouse.OwnerInfoMapper;
 import com.oms.saas.commodity.mapper.Warehouse.WmsSimulationStoreInfoMapper;
+import com.oms.saas.commodity.service.Inventory.InventoryService;
+import com.oms.saas.commodity.service.impl.Inventory.InventoryServiceImpl;
 import com.oms.saas.commodity.service.impl.Warehouse.WmsSimulationStoreInfoServiceImpl;
 import jakarta.annotation.Resource;
 import org.junit.Test;
@@ -20,7 +22,7 @@ public class MapperTest {
     @Resource
     private WmsSimulationStoreInfoMapper simulationStoreInfoMapper;
     @Resource
-    private OwnerInfoMapper ownerInfoMapper;
+    private InventoryService inventoryService;
 
     @Test
     public void testLeftJoin(){
@@ -31,5 +33,10 @@ public class MapperTest {
        }catch (Throwable exception){
            System.out.println("fail"+exception.getCause().getMessage());
        }
+    }
+
+    @Test
+    public void testCGInventoryCallback(){
+        inventoryService.CGInventoryCallback("CG01");
     }
 }

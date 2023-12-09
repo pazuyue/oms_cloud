@@ -31,11 +31,6 @@ public class WmsTicketsGoods implements Serializable {
     private String sn;
 
     /**
-     * ZP正品，CP次品
-     */
-    private String inventoryType;
-
-    /**
      * 内部sku_sn
      */
     private String skuSn;
