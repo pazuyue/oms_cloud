@@ -107,6 +107,8 @@ public class NoTicketsServiceImpl extends ServiceImpl<NoTicketsMapper, NoTickets
             wmsTicketsGoods.setBatchCode(noTicketsGoods.getBatchCode());
             wmsTicketsGoods.setPurchasePrice(noTicketsGoods.getPurchasePrice());
             wmsTicketsGoods.setNumberExpected(noTicketsGoods.getZpNumberExpected());
+            wmsTicketsGoods.setCompanyCode(noTicketsGoods.getCompanyCode());
+
             wmsTicketsGoodsArrayList.add(wmsTicketsGoods);
         }
         QueryWrapper<NoTickets> query1 = new QueryWrapper<>();
@@ -127,6 +129,7 @@ public class NoTicketsServiceImpl extends ServiceImpl<NoTicketsMapper, NoTickets
         tickets.setWmsSimulationName(simulationStoreInfo.getWmsSimulationName());
         tickets.setStoreType(DocumentState.E_COMMERCE_WAREHOUSE.getCode());
         tickets.setRemark(one.getRemarks());
+        tickets.setCompanyCode(jwtInfo.getCompanyCode());
         tickets.setUserName(jwtInfo.getNickName());
         tickets.setActualWarehouse(simulationStoreInfo.getOwnerInfo().getRealStoreInfo().getActualWarehouse());
         wmsTicketsService.save(tickets);
