@@ -42,6 +42,8 @@ public class NoTicketsGoodsTmpServiceImpl extends ServiceImpl<NoTicketsGoodsTmpM
     private NoTicketsService noTicketsService;
     @Resource
     private JwtInfo jwtInfo;
+    @Resource
+    private SnAndBrandAssociationMapperService snAndBrandAssociationMapperService;
 
     @Override
     public boolean save(List<NoTicketsGoodsTmpVO> list, String noSn) {
@@ -62,15 +64,21 @@ public class NoTicketsGoodsTmpServiceImpl extends ServiceImpl<NoTicketsGoodsTmpM
         List<NoTicketsGoodsTmp> list = this.list(queryWrapper);
         if (ObjectUtil.isEmpty(list))
             return false;
+        NoTickets noTickets = noTicketsService.getOne(new QueryWrapper<NoTickets>().eq("sn", noSn));
         int numberExpected = 0;
         BigDecimal priceExpected=new BigDecimal(0);
         List<NoTicketsGoods> ticketsGoodsList = new ArrayList<>();
-        for (NoTicketsGoodsTmp tmp : list) {
-            NoTicketsGoods noTicketsGoods = formatNoTicketsGoods(tmp);
-            ticketsGoodsList.add(noTicketsGoods);
-            numberExpected = numberExpected + noTicketsGoods.getZpNumberExpected();
-            priceExpected = priceExpected.add(noTicketsGoods.getPurchasePrice());
+        List<SnAndBrandAssociation> snAndBrandAssociations = snAndBrandAssociationMapperService.list(new QueryWrapper<SnAndBrandAssociation>().eq("sn",noTickets.getPoSn()));
+        for (SnAndBrandAssociation snAndBrandAssociation : snAndBrandAssociations) {
+            for (NoTicketsGoodsTmp tmp : list) {
+                NoTicketsGoods noTicketsGoods = formatNoTicketsGoods(tmp);
+                noTicketsGoods.setBrandCode(snAndBrandAssociation.getBrandCode());
+                ticketsGoodsList.add(noTicketsGoods);
+                numberExpected = numberExpected + noTicketsGoods.getZpNumberExpected();
+                priceExpected = priceExpected.add(noTicketsGoods.getPurchasePrice());
+            }
         }
+
         return saveNoTicketsGoods(ticketsGoodsList,numberExpected,priceExpected,noSn);
     }
 
