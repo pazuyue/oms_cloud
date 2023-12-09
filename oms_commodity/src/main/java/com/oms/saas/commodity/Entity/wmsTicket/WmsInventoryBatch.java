@@ -1,11 +1,10 @@
-package com.oms.saas.inventory.entity.wmsTicket;
+package com.oms.saas.commodity.Entity.wmsTicket;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.Value;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

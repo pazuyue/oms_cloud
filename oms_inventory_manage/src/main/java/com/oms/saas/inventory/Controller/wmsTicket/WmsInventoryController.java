@@ -70,7 +70,8 @@ public class WmsInventoryController {
      */
     @PostMapping(value = "/addInventory")
     @SneakyThrows
-    public Result<Object> addInventory(WmsInventoryBatch wmsInventoryBatch) {
+    public Result<Object> addInventory(@RequestBody WmsInventoryBatch wmsInventoryBatch) {
+        System.out.println(wmsInventoryBatch.toString());
         WmsInventory wmsInventory = new WmsInventory();
         TSkuInventory skuInventory = new TSkuInventory();
         try {
