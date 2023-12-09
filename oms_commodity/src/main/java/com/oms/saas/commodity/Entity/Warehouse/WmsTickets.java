@@ -211,11 +211,6 @@ public class WmsTickets implements Serializable {
     private Date createTime;
 
     /**
-     * 公司编码
-     */
-    private String companyCode;
-
-    /**
      * wms的出入库时间
      */
     private Date wmsActuallyTime;
