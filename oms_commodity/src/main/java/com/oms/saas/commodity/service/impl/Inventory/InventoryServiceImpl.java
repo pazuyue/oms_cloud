@@ -47,6 +47,7 @@ public class InventoryServiceImpl implements InventoryService {
                 inventoryBatch.setCpActualNumber(wmsTicketsGoods.getNumberExpected());
                 inventoryBatch.setCpAvailableNumber(wmsTicketsGoods.getNumberExpected());
             }
+            inventoryBatch.setBrandCode(wmsTicketsGoods.getBrandCode());
             inventoryBatch.setRemark(wmsTickets.getRemark());
             inventoryBatch.setBatchCode(wmsTicketsGoods.getBatchCode());
             inventoryBatch.setTransactionPrice(wmsTicketsGoods.getPurchasePrice());

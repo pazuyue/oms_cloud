@@ -51,6 +51,11 @@ public class WmsTicketsGoods implements Serializable {
     private String barcodeSn;
 
     /**
+     * 品牌编码
+     */
+    private String brandCode;
+
+    /**
      * 产品名
      */
     private String goodsName;
