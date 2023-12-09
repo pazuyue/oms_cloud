@@ -99,6 +99,7 @@ public class NoTicketsServiceImpl extends ServiceImpl<NoTicketsMapper, NoTickets
         for (NoTicketsGoods noTicketsGoods : list) {
             WmsTicketsGoods wmsTicketsGoods = new WmsTicketsGoods();
             wmsTicketsGoods.setSn(sn);
+            wmsTicketsGoods.setInventoryType("ZP");
             wmsTicketsGoods.setSkuSn(noTicketsGoods.getSkuSn());
             wmsTicketsGoods.setGoodsSn(noTicketsGoods.getGoodsSn());
             wmsTicketsGoods.setBarcodeSn(noTicketsGoods.getBarcodeSn());
@@ -106,8 +107,6 @@ public class NoTicketsServiceImpl extends ServiceImpl<NoTicketsMapper, NoTickets
             wmsTicketsGoods.setBatchCode(noTicketsGoods.getBatchCode());
             wmsTicketsGoods.setPurchasePrice(noTicketsGoods.getPurchasePrice());
             wmsTicketsGoods.setNumberExpected(noTicketsGoods.getZpNumberExpected());
-            wmsTicketsGoods.setCompanyCode(noTicketsGoods.getCompanyCode());
-
             wmsTicketsGoodsArrayList.add(wmsTicketsGoods);
         }
         QueryWrapper<NoTickets> query1 = new QueryWrapper<>();

@@ -31,6 +31,11 @@ public class WmsTicketsGoods implements Serializable {
     private String sn;
 
     /**
+     * ZP正品，CP次品
+     */
+    private String inventoryType;
+
+    /**
      * 内部sku_sn
      */
     private String skuSn;
@@ -90,11 +95,6 @@ public class WmsTicketsGoods implements Serializable {
      */
     private Date modifyTime;
     private Date createTime;
-
-    /**
-     * 公司编码
-     */
-    private String companyCode;
 
     /**
      * wms的出入库时间

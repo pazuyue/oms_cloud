@@ -11,7 +11,9 @@ public enum DocumentState {
     OUTBOUND(2,"出库"),
     E_COMMERCE_WAREHOUSE(1,"电商仓库"),
     REAL_WAREHOUSE(1,"真实库存结算"),
-    VIRTUALLY_WAREHOUSE(2,"虚拟库存结算");
+    VIRTUALLY_WAREHOUSE(2,"虚拟库存结算"),
+    ZP(1,"ZP"),
+    CP(2,"CP");
 
 
     private int code;
