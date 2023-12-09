@@ -30,8 +30,11 @@ public class WmsInventoryBatch implements Serializable {
     /**
      * 仓库编码
      */
-    @TableField(value = "store_code")
-    private String storeCode;
+    /**
+     * 仓库编码
+     */
+    @TableField(value = "wms_simulation_code")
+    private String wmsSimulationCode;
 
     /**
      * sku

@@ -51,7 +51,7 @@ public class TestController {
     public Result testAddInventory()
     {
         WmsInventoryBatch inventoryBatch = new WmsInventoryBatch();
-        inventoryBatch.setStoreCode("V0001");
+        inventoryBatch.setWmsSimulationCode("V0001");
         inventoryBatch.setSkuSn("test01");
         inventoryBatch.setZpActualNumber(100);
         inventoryBatch.setZpAvailableNumber(100);
