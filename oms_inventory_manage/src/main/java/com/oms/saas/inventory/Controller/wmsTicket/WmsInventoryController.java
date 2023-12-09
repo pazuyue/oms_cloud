@@ -1,6 +1,7 @@
 package com.oms.saas.inventory.Controller.wmsTicket;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.oms.saas.inventory.api.Result;
 import com.oms.saas.inventory.entity.wmsTicket.TSkuInventory;
 import com.oms.saas.inventory.entity.wmsTicket.WmsInventoryBatch;
@@ -51,9 +52,11 @@ public class WmsInventoryController {
         return Result.success(aPage);
     }
 
-    @GetMapping(value = "/{id}")
-    public Result<WmsInventory> getById(@PathVariable("id") String id) {
-        return Result.success(wmsInventoryService.getById(id));
+    @GetMapping(value = "/{sku_sn}")
+    public Result<WmsInventory> getOne(@PathVariable("sku_sn") String sku_sn) {
+        QueryWrapper<WmsInventory> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("sku_sn",sku_sn);
+        return Result.success(wmsInventoryService.getOne(queryWrapper));
     }
 
     @PostMapping(value = "/create")

@@ -61,4 +61,10 @@ public class TestController {
         inventoryBatch.setTransactionPrice(new BigDecimal("0.00"));
         return feginInventoryService.addInventory(jwtInfo.getToken(),inventoryBatch);
     }
+
+    @GetMapping("/testGetOne")
+    public Result testGetOne()
+    {
+        return feginInventoryService.getByOne(jwtInfo.getToken(),"test01");
+    }
 }

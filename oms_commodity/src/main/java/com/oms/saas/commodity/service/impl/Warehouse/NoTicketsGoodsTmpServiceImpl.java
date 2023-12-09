@@ -142,8 +142,11 @@ public class NoTicketsGoodsTmpServiceImpl extends ServiceImpl<NoTicketsGoodsTmpM
         tickets.setActualWarehouse(simulationStoreInfo.getOwnerInfo().getRealStoreInfo().getActualWarehouse());
         wmsTicketsService.save(tickets);
         wmsTicketsGoodsService.saveBatch(wmsTicketsGoodsArrayList);
+        //if (tickets.getActualWarehouse() == DocumentState.VIRTUALLY_WAREHOUSE.getCode())
         return true;
     }
+
+
 
     /**
      * 保存提交审核信息并且更新入库通知单状态

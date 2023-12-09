@@ -9,7 +9,10 @@ public enum DocumentState {
     WAREHOUSINGCOMPLETED(4,"已入库"),
     WAREHOUSING(1,"入库"),
     OUTBOUND(2,"出库"),
-    E_COMMERCE_WAREHOUSE(1,"电商仓库");
+    E_COMMERCE_WAREHOUSE(1,"电商仓库"),
+    REAL_WAREHOUSE(1,"真实库存结算"),
+    VIRTUALLY_WAREHOUSE(2,"虚拟库存结算");
+
 
     private int code;
     private String msg;

@@ -11,4 +11,7 @@ public interface FeginInventoryService {
 
     @PostMapping(value = "wms-inventory/addInventory")
     public Result addInventory(@RequestHeader("token") String token,@Param("body") WmsInventoryBatch wmsInventoryBatch);
+
+    @GetMapping(value = "wms-inventory/{sku_sn}")
+    public Result getByOne(@RequestHeader("token") String token,@RequestParam("sku_sn") String sku_sn);
 }
