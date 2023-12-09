@@ -5,6 +5,7 @@ import com.saas.common.security.mapper.User.SysUserMapper;
 import com.saas.common.security.service.user.UserManageService;
 import com.saas.common.security.until.JwtUtils;
 import com.saas.common.security.until.RedisCache;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,11 @@ import java.util.Map;
 @Service
 public class UserManageServiceImpl implements UserManageService {
 
-    @Autowired
+    @Resource
     private JwtUtils jwtUtils;
-    @Autowired
+    @Resource
     private RedisCache redisCache;
-    @Autowired
+    @Resource
     private SysUserMapper sysUserMapper;
 
     @Override
