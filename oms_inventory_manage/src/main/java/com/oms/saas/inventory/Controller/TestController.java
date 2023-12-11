@@ -3,7 +3,6 @@ package com.oms.saas.inventory.Controller;
 import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.oms.saas.inventory.api.Result;
 import com.oms.saas.inventory.dto.jwt.JwtInfo;
-import com.oms.saas.inventory.until.DynamicRoutingDataSource;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
