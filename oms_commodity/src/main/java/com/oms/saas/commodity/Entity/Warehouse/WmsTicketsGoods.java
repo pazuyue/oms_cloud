@@ -83,7 +83,7 @@ public class WmsTicketsGoods implements Serializable {
     /**
      * 实收良品数量
      */
-    private Integer numberHg;
+    private Integer numberZp;
 
     /**
      * 实收次品数量
@@ -94,6 +94,8 @@ public class WmsTicketsGoods implements Serializable {
      * 实际出入库数量的差异
      */
     private Integer numberDifActually;
+
+    private Integer inventoryIsHandle;
 
     /**
      * 修改时间

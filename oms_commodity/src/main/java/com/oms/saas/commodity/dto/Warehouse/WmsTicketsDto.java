@@ -46,11 +46,11 @@ public class WmsTicketsDto implements Serializable {
     private BigDecimal actuallyWeight;
     private BigDecimal actuallyShippingFee;
     private Integer numberSettlement;
-    private Boolean statusTicket;
+    private Integer statusTicket;
     private Byte processStatus;
     private Byte inAcShopStatus;
-    private Boolean statusNotify;
-    private Boolean statusQuery;
+    private Integer statusNotify;
+    private Integer statusQuery;
     private Short retryNotifyCount;
     private Short retryQueryCount;
     private Short retryProcessCount;

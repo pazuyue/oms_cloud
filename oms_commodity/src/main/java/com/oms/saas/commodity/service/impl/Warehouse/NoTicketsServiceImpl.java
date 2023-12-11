@@ -16,6 +16,7 @@ import com.oms.saas.commodity.service.Inventory.InventoryService;
 import com.oms.saas.commodity.service.Warehouse.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class NoTicketsServiceImpl extends ServiceImpl<NoTicketsMapper, NoTickets
     @Resource
     private WmsSimulationStoreInfoMapper simulationStoreInfoMapper;
     @Resource
+    @Qualifier("VirtuallyInventoryServiceInventoryServiceImpl")
     private InventoryService inventoryService;
 
     @Override

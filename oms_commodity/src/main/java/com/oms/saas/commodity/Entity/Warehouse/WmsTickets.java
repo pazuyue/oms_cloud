@@ -133,7 +133,7 @@ public class WmsTickets implements Serializable {
     /**
      * 单据状态，0：待确认，1：已确认待处理，2：已处理完成，3：处理失败，4：待废弃，5：已废弃完成，6：废弃失败 
      */
-    private Boolean statusTicket;
+    private Integer statusTicket;
 
     /**
      * 1:ACCEPT=仓库接单;  2：PRINT = 打印; 3：PICK=拣货; 4:CHECK = 复核; 5:PACKAGE= 打包；6：WEIGH= 称重; 7：READY=待提货; 
@@ -148,12 +148,12 @@ public class WmsTickets implements Serializable {
     /**
      * 通知状态， 0：待通知，1：通知成功，2：通知失败 3.已通知待确认
      */
-    private Boolean statusNotify;
+    private Integer statusNotify;
 
     /**
      * 查询状态，0：全部待查询，1：全部查询成功，2：部分查询成功，3：全部查询失败
      */
-    private Boolean statusQuery;
+    private Integer statusQuery;
 
     /**
      * 通知重试次数
