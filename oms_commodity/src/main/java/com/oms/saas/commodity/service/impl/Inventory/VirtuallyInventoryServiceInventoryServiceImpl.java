@@ -44,13 +44,10 @@ public class VirtuallyInventoryServiceInventoryServiceImpl implements InventoryS
             inventoryBatch.setWmsSimulationCode(wmsTickets.getWmsSimulationCode());
             inventoryBatch.setSkuSn(wmsTicketsGoods.getSkuSn());
 
-            if (wmsTicketsGoods.getInventoryType() == DocumentState.ZP.getMsg()){
-                inventoryBatch.setZpActualNumber(wmsTicketsGoods.getNumberExpected());
-                inventoryBatch.setZpAvailableNumber(wmsTicketsGoods.getNumberExpected());
-            }else {
-                inventoryBatch.setCpActualNumber(wmsTicketsGoods.getNumberExpected());
-                inventoryBatch.setCpAvailableNumber(wmsTicketsGoods.getNumberExpected());
-            }
+            inventoryBatch.setZpActualNumber(wmsTicketsGoods.getNumberZp());
+            inventoryBatch.setZpAvailableNumber(wmsTicketsGoods.getNumberZp());
+            inventoryBatch.setCpActualNumber(wmsTicketsGoods.getNumberCp());
+            inventoryBatch.setCpAvailableNumber(wmsTicketsGoods.getNumberCp());
             inventoryBatch.setBrandCode(wmsTicketsGoods.getBrandCode());
             inventoryBatch.setRemark(wmsTickets.getRemark());
             inventoryBatch.setBatchCode(wmsTicketsGoods.getBatchCode());
