@@ -71,11 +71,11 @@ public class VirtuallyInventoryServiceInventoryServiceImpl implements InventoryS
         tickets.setStatusNotify(DocumentState.STATUS_NOTIFY_PROCESSED_SUCCESS.getCode());
         tickets.setAcceptCallbackTime(new Date());
         wmsTicketsMapper.updateById(tickets);
-        return false;
+        return true;
     }
 
     /**
-     *
+     * 入库单处理
      * @param sn
      * @return
      */
