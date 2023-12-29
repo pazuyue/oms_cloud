@@ -79,4 +79,5 @@ public class WmsInventory implements Serializable {
      */
     private Date modifyTime;
     private Date createTime;
+    private String companyCode;
 }
