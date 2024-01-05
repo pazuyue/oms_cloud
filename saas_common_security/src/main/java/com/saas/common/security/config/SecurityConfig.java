@@ -51,8 +51,9 @@ public class SecurityConfig {
                 //配置需要放行的路径
                 .requestMatchers(
                         "/userManage/register",
-                        "/test/hello",
-                        "/user/**"
+                        "/test/**",
+                        "/user/**",
+                        "/brandInfo/**"
                 )
                 .permitAll() //放行上述的所有路径
 
