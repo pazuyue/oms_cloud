@@ -196,6 +196,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- 优雅停止-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+
     </dependencies>
 
 </project>

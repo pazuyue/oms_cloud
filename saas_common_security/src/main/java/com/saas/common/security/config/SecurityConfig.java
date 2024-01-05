@@ -53,7 +53,8 @@ public class SecurityConfig {
                         "/userManage/register",
                         "/test/**",
                         "/user/**",
-                        "/brandInfo/**"
+                        "/brandInfo/**",
+                        "/shutdown"
                 )
                 .permitAll() //放行上述的所有路径
 
