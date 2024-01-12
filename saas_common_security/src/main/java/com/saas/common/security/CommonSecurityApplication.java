@@ -21,7 +21,7 @@ public class CommonSecurityApplication {
         app.setRegisterShutdownHook(true); // 自动注册关闭钩子
         SpringApplication.run(CommonSecurityApplication.class, args);
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
+/*        ExecutorService executor = Executors.newSingleThreadExecutor();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
                 // 执行优雅停机逻辑
@@ -33,7 +33,7 @@ public class CommonSecurityApplication {
             } catch (InterruptedException e) {
                 executor.shutdownNow(); // 强制关闭线程池
             }
-        }));
+        }));*/
 
     }
 }
