@@ -38,8 +38,7 @@ public class JwtUtils {
 
     /**
      * 生成JWT
-     *
-     * @param user_id
+     * @param map
      * @return
      */
     public String createJwt(Map map) {

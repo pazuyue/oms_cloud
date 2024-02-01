@@ -12,10 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {CommonSecurityApplication.class})
@@ -63,5 +62,58 @@ public class MapperTest {
        }catch (Throwable throwable){
            System.out.println(throwable.getMessage());
        }
+    }
+
+    @Test
+    public void testSgin() {
+        String api = "188688";
+        String secret = "61dfd4115e68545620e77f2a2559438b";
+        String timestamp = "1706700905";
+        String nonce = "测试";
+        String signature = this.generateSignature(api, timestamp, nonce, secret);
+        System.out.println("SHA-1 Hash: " + signature);
+    }
+
+
+    public String generateSignature(String appKey, String timestamp, String nonce, String dataEnterAppSecret) {
+        // 组合数组
+        String[] elements = {appKey, timestamp, nonce, dataEnterAppSecret};
+
+        // 按照SORT_STRING规则排序（这里假设是字典序）
+        Arrays.sort(elements, Comparator.comparing(String::toString));
+
+        // 拼接成一个字符串
+        StringBuilder sortedString = new StringBuilder();
+        for (String element : elements) {
+            sortedString.append(element);
+        }
+
+        // MD5加密
+        try {
+            MessageDigest md5Digest = MessageDigest.getInstance("MD5");
+            byte[] md5Bytes = md5Digest.digest(sortedString.toString().getBytes("UTF-8"));
+            StringBuilder md5Hex = new StringBuilder();
+            for (byte b : md5Bytes) {
+                md5Hex.append(String.format("%02x", b));
+            }
+            String md5Hashed = md5Hex.toString();
+
+            // 添加timestamp的最后一个字符
+            char lastTimestampChar = timestamp.charAt(timestamp.length() - 1);
+
+            // 将MD5哈希值与timestamp的最后一个字符拼接
+            String combinedStr = md5Hashed + lastTimestampChar;
+
+            // SHA-1加密
+            MessageDigest sha1Digest = MessageDigest.getInstance("SHA-1");
+            byte[] sha1Bytes = sha1Digest.digest(combinedStr.getBytes("UTF-8"));
+            StringBuilder sha1Hex = new StringBuilder();
+            for (byte b : sha1Bytes) {
+                sha1Hex.append(String.format("%02x", b));
+            }
+            return sha1Hex.toString();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to compute signature", e);
+        }
     }
 }
