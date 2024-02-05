@@ -5,6 +5,7 @@ import com.saas.common.security.entity.User.SysUser;
 import com.saas.common.security.mapper.User.SysUserMapper;
 import com.saas.common.security.until.RedisCache;
 import com.saas.common.security.vo.user.LoginUser;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,7 +16,7 @@ import org.springframework.util.ObjectUtils;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
+    @Resource
     private SysUserMapper sysUserMapper;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
