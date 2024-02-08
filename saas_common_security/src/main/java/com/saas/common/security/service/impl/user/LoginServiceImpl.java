@@ -1,6 +1,7 @@
 package com.saas.common.security.service.impl.user;
 
 import com.saas.common.security.api.Result;
+import com.saas.common.security.config.UserPro;
 import com.saas.common.security.entity.User.SysUser;
 import com.saas.common.security.service.user.LoginService;
 import com.saas.common.security.until.JwtUtils;
@@ -32,8 +33,8 @@ public class LoginServiceImpl implements LoginService {
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
-        LoginUser loginUser = (LoginUser)authenticate.getPrincipal();
-        SysUser sysUser =loginUser.getSysUser();
+        UserPro userPro = (UserPro)authenticate.getPrincipal();
+        SysUser sysUser = userPro.getUser();
         int user_id = sysUser.getId();
         String company_code = sysUser.getCompanyCode();
         String nickName = sysUser.getNickName();
@@ -43,7 +44,7 @@ public class LoginServiceImpl implements LoginService {
         map.put("nick_name",nickName);
         System.out.println("createJwtMap"+map);
         String jwt = jwtUtils.createJwt(map);
-        redisCache.setCacheObject("login:"+user_id,loginUser.getSysUser(),3600, TimeUnit.SECONDS);
+        redisCache.setCacheObject("login:"+user_id,sysUser,3600, TimeUnit.SECONDS);
         return Result.success(jwt);
     }
 
