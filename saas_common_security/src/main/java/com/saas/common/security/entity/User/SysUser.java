@@ -8,6 +8,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -65,17 +66,12 @@ public class SysUser {
      * 头像
      */
     private String avatar;
-
-    /**
-     * 公司编码
-     */
-    @NotBlank(message = "公司编码不能为空")
-    private String companyCode;
-
     /**
      * 1 普通会员 2管理员
      */
     private Byte userType;
     private Date createTime;
     private Date modifyTime;
+
+
 }

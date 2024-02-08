@@ -2,11 +2,15 @@ package com.saas.common.security.service.impl.user;
 
 import com.saas.common.security.api.Result;
 import com.saas.common.security.config.UserPro;
+import com.saas.common.security.dto.UserDTO;
 import com.saas.common.security.entity.User.SysUser;
+import com.saas.common.security.entity.User.UserCompanys;
+import com.saas.common.security.mapper.User.SysUserMapper;
 import com.saas.common.security.service.user.LoginService;
 import com.saas.common.security.until.JwtUtils;
 import com.saas.common.security.until.RedisCache;
 import com.saas.common.security.vo.user.LoginUser;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,35 +20,37 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
 public class LoginServiceImpl implements LoginService {
 
-    @Autowired
+    @Resource
     private AuthenticationManager authenticationManager;
-    @Autowired
+    @Resource
     private RedisCache redisCache;
-    @Autowired
+    @Resource
     private JwtUtils jwtUtils;
+
     @Override
     public Result login(SysUser user) {
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         UserPro userPro = (UserPro)authenticate.getPrincipal();
-        SysUser sysUser = userPro.getUser();
-        int user_id = sysUser.getId();
-        String company_code = sysUser.getCompanyCode();
-        String nickName = sysUser.getNickName();
+        UserDTO userDTO = userPro.getUser();
+        int user_id = userDTO.getId();
+        List<UserCompanys> companys = userDTO.getUserCompanysList();
+        String nickName = userDTO.getNickName();
         Map map =new HashMap();
         map.put("user_id",user_id);
-        map.put("company_code",company_code);
+        map.put("company_code",companys);
         map.put("nick_name",nickName);
         System.out.println("createJwtMap"+map);
         String jwt = jwtUtils.createJwt(map);
-        redisCache.setCacheObject("login:"+user_id,sysUser,3600, TimeUnit.SECONDS);
+        redisCache.setCacheObject("login:"+user_id,userDTO,3600, TimeUnit.SECONDS);
         return Result.success(jwt);
     }
 
