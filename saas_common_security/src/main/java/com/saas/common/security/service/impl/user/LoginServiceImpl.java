@@ -42,11 +42,11 @@ public class LoginServiceImpl implements LoginService {
         UserPro userPro = (UserPro)authenticate.getPrincipal();
         UserDTO userDTO = userPro.getUser();
         int user_id = userDTO.getId();
-        List<UserCompanys> companys = userDTO.getUserCompanysList();
+        String companyCode = userDTO.getCompanyCode();
         String nickName = userDTO.getNickName();
         Map map =new HashMap();
         map.put("user_id",user_id);
-        map.put("company_code",companys);
+        map.put("company_code",companyCode);
         map.put("nick_name",nickName);
         System.out.println("createJwtMap"+map);
         String jwt = jwtUtils.createJwt(map);

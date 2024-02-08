@@ -13,6 +13,7 @@ import java.util.List;
 
 @Data
 public class UserDTO extends SysUser{
-    private List<BrandInfo> brandInfoList;
-    private List<UserCompanys> userCompanysList;
+    private String companyCode; //在线登录公司
+    private List<BrandInfo> brandInfoList; //品牌集合
+    private List<UserCompanys> userCompanysList; //公司集合
 }

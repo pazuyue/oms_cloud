@@ -44,6 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserDTO userDTO = new UserDTO();
         BeanUtil.copyProperties(sysUser, userDTO);
         userDTO.setUserCompanysList(userCompanys);
+        userDTO.setCompanyCode(userCompanys.get(0).getCompanyCode());
         //查询用户权限信息
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("haha"));
