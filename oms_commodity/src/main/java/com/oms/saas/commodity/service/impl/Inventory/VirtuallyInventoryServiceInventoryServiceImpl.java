@@ -14,12 +14,14 @@ import com.oms.saas.commodity.service.FeignClients.Inventory.FeginInventoryServi
 import com.oms.saas.commodity.service.Inventory.InventoryService;
 import com.oms.saas.commodity.service.Warehouse.WmsTicketsGoodsService;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Qualifier("VirtuallyInventory")
 public class VirtuallyInventoryServiceInventoryServiceImpl implements InventoryService {
 
     @Resource

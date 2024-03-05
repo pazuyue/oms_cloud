@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-//@ServletComponentScan
+@ServletComponentScan
 @EnableFeignClients
 @MapperScan({"com.oms.saas.commodity.mapper.*"})
 public class OmsCommodityApplication {

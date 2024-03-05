@@ -9,6 +9,10 @@ spring:
       config:
         serverAddr:  ${spring.host:127.0.0.1}:8848
         file-extension: yaml
+    sentinel:
+      transport:
+        dashboard: ${spring.host:127.0.0.1}:8858 # 配置sentinel dashboard地址
+        port: 8719 # 默认8719端口，如果被占用，默认从8719开始依次+1扫描，直至找到未被占用的端口
 management:
   endpoint:
     health:
@@ -20,3 +24,6 @@ management:
 logging:
   level:
     com.alibaba.cloud.nacos.configdata: debug
+feign:
+  sentinel:
+    enabled: true

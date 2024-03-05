@@ -19,7 +19,8 @@ public enum ResultCode {
     FAILED(10001, "操作失败"),
     TOKEN_FAILED(10002, "token失效"),
     PARAM_ERROR(10003,"参数错误"),
-    NONE(99999, "无");
+    NONE(99999, "无"),
+    CURRENTLIMITING(10005, "服务降级返回");
 
     private int code;
     private String msg;
