@@ -1,5 +1,6 @@
 package com.saas.common.security.controller;
 
+import com.saas.common.security.api.Result;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,8 @@ public class TestController {
     private String useLocalCache;
 
     @GetMapping("/hello")
-    public String hello() {
-        return "Hello,yueguang"+useLocalCache;
+    public Result hello() {
+        String msg = "Hello,yueguang"+useLocalCache;
+        return Result.success(msg);
     }
 }

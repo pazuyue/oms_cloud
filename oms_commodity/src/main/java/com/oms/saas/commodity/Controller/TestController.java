@@ -4,6 +4,7 @@ import com.oms.saas.commodity.Entity.wmsTicket.WmsInventoryBatch;
 import com.oms.saas.commodity.api.Result;
 import com.oms.saas.commodity.dto.JwtInfo;
 import com.oms.saas.commodity.dto.Store.SimulationStoreInfoDto;
+import com.oms.saas.commodity.service.FeignClients.FeginGateWayService;
 import com.oms.saas.commodity.service.FeignClients.Inventory.FeginInventoryService;
 import com.oms.saas.commodity.service.impl.Warehouse.WmsSimulationStoreInfoServiceImpl;
 import jakarta.annotation.Resource;
@@ -27,6 +28,8 @@ public class TestController {
     @Resource
     private FeginInventoryService feginInventoryService;
     @Resource
+    private FeginGateWayService feginGateWayService;
+    @Resource
     private JwtInfo jwtInfo;
 
     @RequestMapping(value = "/get", method = GET)
@@ -44,7 +47,11 @@ public class TestController {
     public Result testCache(){
         SimulationStoreInfoDto simulationStoreInfo = wmsSimulationStoreInfoService.getSimulationStoreInfoDto("VC0001");
         return Result.success("Hello," + simulationStoreInfo.toString());
+    }
 
+    @GetMapping("/testHello")
+    public Result testHello(){
+       return feginGateWayService.testHello();
     }
 
     @GetMapping("/testAddInventory")
